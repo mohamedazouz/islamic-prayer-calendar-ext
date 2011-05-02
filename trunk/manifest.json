@@ -3,7 +3,7 @@
     "version": "1.0",
     "description": "",
     "background_page": "views/background.html",
-//    "options_page": "views/options.html",
+    "options_page": "views/options.html",
 //    "default_locale":"ar",
     "icons":{
 //        "48": "views/icons/facebookchat.png",
@@ -15,5 +15,5 @@
         "default_title": "Islamic Calendar"//,
 //        "popup": "views/popup.html"
     },
-    "permissions": [ "http://*/*","geolocation"]
+    "permissions": [ "http://*/*","https://*/*","geolocation"]
 }
