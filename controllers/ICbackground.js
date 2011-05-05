@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+dayInMilliSecond = 1000 * 60 * 60 * 24;
 var icBackground=function(){
-    var icBackground ={
+    var icbackground ={
         /**
          * constructor of islamic calendar background class.
          */
@@ -16,7 +17,14 @@ var icBackground=function(){
          * the running processes.
          */
         doInBackground:function(){
-
+            window.setInterval(function(){
+                icbackground.nextPrayerBadge();
+            }, 1000 * 60);
+            window.setInterval(function(){
+                icbackground.calendarLast();
+            }, dayInMilliSecond);
+            icbackground.nextPrayerBadge();
+            icbackground.calendarLast();
         },
         /**
          * update the calendar.
@@ -24,40 +32,29 @@ var icBackground=function(){
         updateCalendar:function(){
 
         },
+        /**
+         * shows the badge text for next prayer time left.
+         */
         nextPrayerBadge:function(){
-            if(! window.localStorage.prayers){
-                return;
+            var nextPrayer = null;
+            if(window.localStorage.nextPrayer){
+                nextPrayer = parseInt(window.localStorage.nextPrayer);
             }
-            var nextPrayer;
-            if(! window.localStorage.nextPrayer){
-                var now=new Date();
-                var prayers=JSON.parse(window.localStorage.prayers);
-                var todayPrayers=prayers[now.getDate()];
-                var fajr = new Date();
-                fajr.setHours(todayPrayers.fajr.split(':')[0], todayPrayers.fajr.split(':')[1]);
-                var zuhr = new Date();
-                zuhr.setHours(todayPrayers.zuhr.split(':')[0], todayPrayers.zuhr.split(':')[1]);
-                var asr = new Date();
-                asr.setHours(todayPrayers.asr.split(':')[0], todayPrayers.asr.split(':')[1]);
-                var maghreb = new Date();
-                maghreb.setHours(todayPrayers.maghreb.split(':')[0], todayPrayers.maghreb.split(':')[1]);
-                var isha = new Date();
-                isha.setHours(todayPrayers.isha.split(':')[0], todayPrayers.isha.split(':')[1]);
-                var todayprayersTimes = new Array();
-                todayprayersTimes.push(fajr.getTime());
-                todayprayersTimes.push(zuhr.getTime());
-                todayprayersTimes.push(asr.getTime());
-                todayprayersTimes.push(maghreb.getTime());
-                todayprayersTimes.push(isha.getTime());
-                var nextPrayerTime;
-                for(i = 0; todayprayersTimes.length; i++){
-                    if(now.getTime() < todayprayersTimes[i]){
-                        nextPrayerTime=todayprayersTimes[i];
-                    }
-                }
+            if(nextPrayer == null || nextPrayer < new Date().getTime()){
+                icdb.getNextPrayer(new Date().getTime(), function(ob){
+                    nextPrayer = ob.datetime;
+                    window.localStorage.nextPrayer = nextPrayer;
+                    var timeDeff = nextPrayer - new Date().getTime();
+                    timeDeff /= (1000 * 60);
+                    extension.setBadgeText((timeDeff / 60) + ":" + (timeDeff % 60));
+                });
+                icdb.deleteOldPrayers(null);
+            }else{
+                var timeDeff = nextPrayer - new Date().getTime();
+                timeDeff /= (1000 * 60);
+                extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
             }
-            console.log(todayPrayers);
-            console.log(todayPrayers[0]);
+            
         },
         /**
          * update client position and check it's changed.
@@ -65,19 +62,17 @@ var icBackground=function(){
         updatePosition:function(){
             if(window.navigator.geolocation){
                 //getting the new position.
-                navigator.geolocation.getCurrentPosition(function(pos) {
-                    var position={
-                        lat:pos.coords.latitude,
-                        lng:pos.coords.longitude
-                    }
+                Positioning.getPosition(function(position){
                     if(! window.localStorage.position){
                         window.localStorage.position=JSON.stringify(position);
                     }
                     var oldPosition = JSON.parse(window.localStorage.position);
                     if(Positioning.latLngChanged(position, oldPosition)){
-                        //position changed, do what ever you do when the position changed.
-                    }
+                //position changed, do what ever you do when the position changed.
+                //delete the old calendar events, create new events for the upcoming days.
+                }
                 });
+
             }
         },
         /**
@@ -85,29 +80,63 @@ var icBackground=function(){
          */
         calendarLast:function(){
             icdb.getLastday(function(lastprayer){
+                var lastdate=null;
                 if(lastprayer){
-                    var lastFor=parseInt(window.localStorage.lastFor);
-                    var lastdate=new Date(lastprayer.date);
-                    var date=new Date();
-                    date.setTime(date.getTime()+ (lastFor * 24 * 60 * 60 * 1000));
-                    if(date.getDate() != lastdate.getdata() || date.getMonth() != lastdate.getMonth() ){
-                        //u have calendar leek. :) do something about that.
-                    }
+                    lastdate=new Date(lastprayer.date);
+                }else{
+                    lastdate=new Date(date_util.yesterDay("-"));
+                }
+                var lastFor=parseInt(window.localStorage.lastFor);
+                var date=new Date(date_util.today('-'));
+                date.setTime(date.getTime()+ (lastFor * dayInMilliSecond));
+                if(date.getDate() != lastdate.getDate() || date.getMonth() != lastdate.getMonth() ){
+                    //u have calendar leek. :) do something about that.
+                    //update the missing days.
+                    var daydiff=date.getTime()-lastdate.getTime();
+                    daydiff /= dayInMilliSecond;
+                    Positioning.getPosition(function(pos){
+                        var month =lastdate.getMonth()+1;
+                        icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
+                            for(var i =0; i < daydiff;i++){
+                                lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
+                                var dayPrayers = null;
+                                if(lastdate.getMonth()+1 == month){
+                                    dayPrayers=ob[lastdate.getDate()];
+                                }else{
+                                    dayPrayers=ob2[lastdate.getDate()];
+                                }
+                                var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.fajr.split(":")[0],dayPrayers.fajr.split(":")[1]);
+                                var zuhr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.zuhr.split(":")[0],dayPrayers.zuhr.split(":")[1]);
+                                var asr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.asr.split(":")[0],dayPrayers.asr.split(":")[1]);
+                                var maghrib=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.maghrib.split(":")[0],dayPrayers.maghrib.split(":")[1]);
+                                var isha=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.isha.split(":")[0],dayPrayers.isha.split(":")[1]);
+                                dayPrayers.fajrTime=fajr.getTime();
+                                dayPrayers.zuhrTime=zuhr.getTime();
+                                dayPrayers.asrTime=asr.getTime();
+                                dayPrayers.maghribTime=maghrib.getTime();
+                                dayPrayers.ishaTime=isha.getTime();
+                                icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
+                                    console.log('dona');
+                                });
+                            //now send to calendar to set new events.
+                            }
+                        })
+                    });
                 }
             });
         }
     }
     $(function(){
-        //icBackground.nextPrayerBadge();
+        icbackground.initialize();
+        icbackground.doInBackground();
         if(!window.localStorage.setup){
-    //extension.openOptionPage();
-    }
+            return;
+            extension.openOptionPage();
+        }
     });
-    return icBackground;
+    return icbackground;
 };
 
-icBackground = new icBackground();
-icBackground.updatePosition();
 var Positioning={};
 
 Positioning.geonamesVars = function(lat,lng,handler){
@@ -155,3 +184,18 @@ Positioning.latLngChanged = function(newPosition,oldPosition){
 
     return positionChanged;
 }
+Positioning.getPosition = function(fn){
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        var position={
+            lat:pos.coords.latitude,
+            lng:pos.coords.longitude
+        }
+        fn(position);
+    })
+}
+
+var icbackground = new icBackground();
+icbackground.updatePosition();
+$(function(){
+    icbackground.calendarLast();
+})

@@ -17,6 +17,11 @@ var extension={
             url:chrome.extension.getURL('views/options.html'),
             selected:true
         });
+    },
+    setBadgeText:function(text){
+        chrome.browserAction.setBadgeText({
+            text:""+(text)
+        });
     }
 }
 
