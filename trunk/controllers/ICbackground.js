@@ -9,9 +9,67 @@ var icBackground=function(){
          * constructor of islamic calendar background class.
          */
         initialize:function(){
+            icbackground.initialData();
+            icbackground.doInBackground();
+            if(!window.localStorage.setup){
+                return;
+                extension.openOptionPage();
+            }
+        },
+        /**
+         * set Extension initial data settings.
+         */
+        initialData:function(){
             if(! window.localStorage.lastFor){
                 window.localStorage.lastFor = 7;
             }
+            if(! window.localStorage.alertType){
+                window.localStorage.alertType = JSON.stringify(['all']);
+            }
+            if(! window.localStorage.eventFor){
+                window.localStorage.eventFor = JSON.stringify(['all']);
+            }
+            if(! window.localStorage.fajrSettings){
+                window.localStorage.fajrSettings = JSON.stringify({
+                    reminderAt:10,
+                    eventLong:10,
+                    privacy:'public',
+                    status:'available'
+                });
+            }
+            if(! window.localStorage.zuhrSettings){
+                window.localStorage.zuhrSettings = JSON.stringify({
+                    reminderAt:10,
+                    eventLong:10,
+                    privacy:'public',
+                    status:'available'
+                });
+            }
+            if(! window.localStorage.asrSettings){
+                window.localStorage.asrSettings = JSON.stringify({
+                    reminderAt:10,
+                    eventLong:10,
+                    privacy:'public',
+                    status:'available'
+                });
+            }
+            if(! window.localStorage.maghribSettings){
+                window.localStorage.maghribSettings = JSON.stringify({
+                    reminderAt:10,
+                    eventLong:10,
+                    privacy:'public',
+                    status:'available'
+                });
+            }
+            if(! window.localStorage.ishaSettings){
+                window.localStorage.ishaSettings = JSON.stringify({
+                    reminderAt:10,
+                    eventLong:10,
+                    privacy:'public',
+                    status:'available'
+                });
+            }
+
         },
         /**
          * the running processes.
@@ -23,8 +81,12 @@ var icBackground=function(){
             window.setInterval(function(){
                 icbackground.calendarLast();
             }, dayInMilliSecond);
+            window.setInterval(function(){
+                icbackground.updatePosition();
+            }, dayInMilliSecond);
             icbackground.nextPrayerBadge();
             icbackground.calendarLast();
+            icbackground.updatePosition();
         },
         /**
          * update the calendar.
@@ -68,9 +130,12 @@ var icBackground=function(){
                     }
                     var oldPosition = JSON.parse(window.localStorage.position);
                     if(Positioning.latLngChanged(position, oldPosition)){
-                //position changed, do what ever you do when the position changed.
-                //delete the old calendar events, create new events for the upcoming days.
-                }
+                        //position changed, do what ever you do when the position changed.
+                        //delete the old calendar events, create new events for the upcoming days.
+                        icdb.deleteAllPrayers(function(){
+                            icbackground.calendarLast();
+                        });
+                    }
                 });
 
             }
@@ -128,11 +193,6 @@ var icBackground=function(){
     }
     $(function(){
         icbackground.initialize();
-        icbackground.doInBackground();
-        if(!window.localStorage.setup){
-            return;
-            extension.openOptionPage();
-        }
     });
     return icbackground;
 };
@@ -195,7 +255,6 @@ Positioning.getPosition = function(fn){
 }
 
 var icbackground = new icBackground();
-icbackground.updatePosition();
-$(function(){
-    icbackground.calendarLast();
+chrome.browserAction.onClicked.addListener(function(tab){
+    extension.openOptionPage();
 })
