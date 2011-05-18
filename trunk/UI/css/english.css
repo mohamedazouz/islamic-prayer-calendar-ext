@@ -1,0 +1,27 @@
+.f{
+	float:left;
+	}
+.f-r{
+	float:right;
+	}
+.container{
+	direction:ltr;
+	}
+.checkbox, .radio {
+	float: left;
+}
+.sub-menu{
+	left:35px;
+	}
+.gred{
+	right:auto;
+	left:20px;
+	}
+.checkbox-all {
+	margin-left:0px;
+	margin-right:200px;
+}
+.checkbox, .radio {
+
+	margin-right: 5px;
+}
