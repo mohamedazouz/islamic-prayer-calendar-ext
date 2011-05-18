@@ -1,0 +1,163 @@
+/* common */
+body{
+	margin:0;
+	padding:0;
+	}
+a{
+	text-decoration:none;
+	}
+img{
+	border:none;
+	}
+.f{
+	float:right;
+	}
+.f-r{
+	float:left;
+	}
+
+/* Forms style */
+.checkbox, .radio {
+	width: 11px;
+	height: 18px;
+	padding: 0 5px 0 0;
+	background: url(../images/checkbox.png) no-repeat;
+	display: block;
+	clear: left;
+	float: right;
+	margin-left:5px;
+}
+.radio {
+	background: url(../images/radio.png) no-repeat;
+}
+.select {
+	position: absolute;
+	width: 57px; /* With the padding included, the width is 190 pixels: the actual width of the image. */
+	height: 27px;
+	color: #fff;
+	background: url(../images/select.png) no-repeat right;
+	overflow: hidden;
+	right:0;
+	line-height:24px;
+	text-align:center;
+}
+.styled{
+	width:60px!important;
+	}
+
+/* page style */
+
+.container{
+	width:1000px;
+	margin:0 auto;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:14px;
+	color:#4c4c4c;
+	direction:rtl;
+	}
+.page-title{
+	margin:20px;
+	font-size:17px;
+	}
+.language-menu{
+	margin:10px;
+	color:#FFF;
+	font-size:13px;
+	position:relative;
+	}
+.language-menu span{
+	padding:4px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#1c1c1c), to(#565656));
+	box-shadow:0 0 4px #606060;
+	}
+.language{
+	width:117px;
+	cursor:pointer;
+	}
+.sub-menu{
+	width:125px;
+	position:absolute;
+	left:0;
+	top:24px;
+	box-shadow:0 0 4px #606060;
+	display:none;
+	z-index:888;
+	}
+.sub-menu ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	}
+.sub-menu li{
+	padding:5px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#565656));
+	cursor:pointer;
+	}
+.sub-menu li:hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
+	}
+.titles-bar{
+	width:1000px;
+	height:40px;
+	background:url(../images/titles-bar.png) no-repeat;
+	position:relative;
+	}
+.gred{
+	-webkit-box-shadow: inset 0 0 5px #FFF;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#c9c9c9));
+	border:1px solid #d1d1d1;
+	position:absolute;
+	top:-5px;
+	right:20px;
+	padding:15px 10px;
+	}
+.radio-cont{
+	padding:20px;
+	font-size:12px;
+	}
+.button-cont{
+	text-align:center;
+	width:100%;
+	padding-bottom:50px;
+	}
+.radio-cont input[type='text']{
+	width:345px;
+	}
+.button{
+	background:url(../images/button.png) no-repeat;
+	border:0;
+	width:111px;
+	height:26px;
+	color:#fff;
+	font:12px Tahoma, Geneva, sans-serif;
+	}
+.map{
+	width:850px;
+	height:280px;
+	margin:25px 50px;
+	border:1px solid #545454;
+	}
+.reminder{
+	width: 100%;
+	padding-bottom: 25px;
+	}
+.checkbox-container{
+	margin:0 10px;
+	font-size:12px;
+	position:relative;
+	}
+.checkbox-all{
+	margin-left:200px;
+	}
+.note{
+	width:375px;
+	height:15px;
+	background:#e8e8e8;
+	padding:20px 35px;
+	margin:15px;
+	}
+.pray-times{
+	width:100%;
+	font-size:12px;
+	padding-bottom:40px;
+	}

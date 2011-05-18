@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>اعدادات مواقيت الصلاة</title>
+
+<!-- styles -->
+<link rel="stylesheet" type="text/css" href="css/options.css" />
+<link rel="stylesheet" type="text/css" href="css/english.css" />
+
+<!-- script -->
+<script type="text/javascript" src="js/custom-form-elements.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.language-menu').hover(function() {
+  	$('.sub-menu').stop(true, true).slideToggle('slow', function() {
+    // Animation complete.
+  		});
+	});
+});
+</script>
+</head>
+
+<body>
+	<!-- main container -->
+    <div class="container">
+        <div>
+        	<!-- title of extension -->
+        	<div class="page-title f">اعدادات مواقيت الصلاة</div>
+            <!-- language switch logo -->
+            <div class="language-menu f-r">
+            	<span class="f">اللغة</span>
+            	<img src="images/separator.png" class="f" />
+            	<span class="f language">العربية</span>
+                <div class="sub-menu">
+                    <ul>
+                    	<li>الانجليزية</li>
+                    	<!--<li>الفرنسية</li>
+                    	<li>الايطالية</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- location selection -->    
+    <div class="titles-bar f">
+    	<div class="gred">تحديد المكان</div>
+    </div>
+    <div class="radio-cont f">
+        <label>
+        	<input type="radio" name="radio" class="styled" />
+        	تبعا للمكان الحالى
+        </label>
+    	<input type="text" />
+    	<input type="submit" class="button" value="بحــــث" />
+    <div class="map">
+    	<img src="images/map.png" width="850" height="280" alt="map" />
+    </div>
+    <label>
+    	<input type="radio" name="radio" class="styled" />
+    	تبعا لمفكرة Google
+    </label>
+    </div>
+     <!--reminder method -->
+    <div class="titles-bar f">
+    	<div class="gred">طريقة التذكير فى مفكرة Google</div>
+    </div>
+    
+    <div class="f reminder">
+   	  <p>
+    	  <div class="checkbox-container f checkbox-all">
+    	    <input type="checkbox" name="a" class="styled" />
+    	    الكل
+          </div>
+    	  
+    	  <div class="checkbox-container f">
+    	    <input type="checkbox" name="b" class="styled" />
+    	    نافذة منبثقة
+          </div>
+    	  
+    	  <div class="checkbox-container f">
+    	    <input type="checkbox" name="c" class="styled" />
+    	    البريد الألكترونى
+          </div>
+    	  
+    	  <div class="checkbox-container f">
+    	    <input type="checkbox" name="d" class="styled" />
+    	    خدمة الرسائل القصيرة
+          </div>
+    	  
+  	  </p>
+    </div>
+    
+    <div class="titles-bar f">
+    	<div class="gred">الحالة & الخصوصية فى مفكرة Google</div>
+    </div>
+    
+    <div class="note f-r">سيتم حذف المواقيت غير المختارة من المفكرة Google عند الحفظ</div>
+    
+    <div class="pray-times f">
+	<table width="100%" border="0" cellspacing="12" cellpadding="0">
+		<tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 كل الصلوات
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="a" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="b" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="c" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="d" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  <tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 صلاة الفجر
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="e" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="f" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="g" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="h" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  <tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 صلاة الظهر
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="i" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="j" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="k" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="l" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  <tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 صلاة العصر
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="m" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="n" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="o" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="p" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  <tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 صلاة المغرب
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="q" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="r" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="s" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="t" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  <tr>
+    		<td width="150">
+    			<div class="checkbox-container f">
+    	    		<input type="checkbox" name="d" class="styled" />
+    	   			 صلاة العشاء
+        		</div>
+    		</td>
+    		<td width="200">
+    			<label class="f"> الصلاة بعد الأذان بـ</label>
+         		<div class="checkbox-container f">
+				<select name="u" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        		</div>
+        		<label class="f"> ق</label>
+    		</td>
+    		<td width="300">
+    		<label class="f">  لمدة</label>
+         	<div class="checkbox-container f">
+				<select name="v" class="styled">
+					<option value="1">10</option>
+					<option value="2">20</option>
+					<option value="3">30</option>
+				</select>
+        	</div>
+        	<label class="f"> ق</label>
+    	</td>
+    	<td width="170">
+    		<label class="f"> الخصوصية</label>
+        	<div class="checkbox-container f">
+				<select name="w" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    
+        </td>
+    	<td>
+    		<label class="f"> الحاله</label>
+        	<div class="checkbox-container f">
+				<select name="x" class="styled">
+					<option value="1">عام</option>
+					<option value="2">خاص</option>
+				</select>
+        	</div>
+    	</td>
+  </tr>
+  
+  
+  
+  
+  
+  
+</table>
+
+
+    </div>
+    
+    <div class="titles-bar f">
+    	<div class="gred">المدة الزمنية لتسجيل مواقيت الصلاة مفكرة Google</div>
+    </div>
+    
+    <div class="radio-cont f">
+    	<label class="f" style="margin-left:20px;">
+        	<input type="radio" name="status" class="styled" />
+        	أسبوعى 
+        </label>
+        <label class="f">
+        	<input type="radio" name="status" class="styled" />
+        	شهرى
+        </label>
+        
+    </div>
+    <div class="button-cont f">
+        
+        <input type="submit" class="button" value="حفــظ" />
+        <input type="submit" class="button" value="إلغاء التعديلات" />
+        </div>
+    
+    </div>
+</body>
+</html>
