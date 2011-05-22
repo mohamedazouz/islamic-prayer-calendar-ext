@@ -25,15 +25,56 @@ and open the template in the editor.
     </head>
     <body>
         <form onsubmit="return false;">
-            <input id="address" type="textbox" value="">
+            <input id="address" type="textbox" size="50" value="">
             <input id="gotoButton" type="submit" value="Go to">
-            <label id="country"></label>/
-            <label id="code"></label>/
-            <label id="code1"></label>
+            <label id="country"></label>
         </form>
-        
         <center>
             <a id="map_canvas"></a>
         </center>
+        <table style="padding-top: 200px;">
+            <tr>
+                <td>reminder type</td>
+                <td>
+                    <label>
+                        All <input type="checkbox" id="AllReminder"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        popup window <input type="checkbox" id="popupReminder"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        Email <input type="checkbox" id="emailReminder"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        SMS <input type="checkbox" id="smsReminder"/>
+                    </label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        all prayers <input type="checkbox" id="allprayers"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        pray after prayer time in <select>
+                            <option 
+                        </select>
+                    </label>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
     </body>
 </html>

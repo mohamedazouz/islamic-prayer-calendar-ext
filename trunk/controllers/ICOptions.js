@@ -17,6 +17,13 @@ var lat,lng,gmt,country,countryCode,timezoneId,city,formatted_address;
 var map,marker,geocoder,center;
 var Positioning={
     initialize:function(){
+        if(! window.localStorage.userAuth){
+            background.extension.openURL(background.ProxyService.proxyRootURL+background.ProxyService.authSub,true);
+            chrome.extension.sendRequest({
+                'action':'authenticate'
+            });
+            window.close();
+        }
         var myOptions = {
             zoom: 6,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -151,7 +158,7 @@ var Positioning={
                     i = ob.results.length;
                 }
             }
-            $("#country").html(formatted_address);
+            $("#address").val(formatted_address);
         });
     }
 }

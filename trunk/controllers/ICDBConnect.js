@@ -83,6 +83,13 @@ var ICDB = function(){
                     fn);
             });
         },
+        deleteAllPrayers:function(fn){
+            icdb.db.transaction(function(tx){
+                tx.executeSql("DELETE FROM ic;",
+                    [],
+                    fn);
+            });
+        },
         onError: function(tx,error) {
             console.log("Error occurred: ", error);
         }
