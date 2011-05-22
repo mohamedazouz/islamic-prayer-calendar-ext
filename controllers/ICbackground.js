@@ -11,8 +11,7 @@ var icBackground=function(){
         initialize:function(){
             icbackground.initialData();
             icbackground.doInBackground();
-            if(!window.localStorage.setup){
-                return;
+            if(! window.localStorage.setup){
                 extension.openOptionPage();
             }
         },
@@ -34,7 +33,7 @@ var icBackground=function(){
                     reminderAt:10,
                     eventLong:10,
                     privacy:'public',
-                    status:'available'
+                    status:'opaque'
                 });
             }
             if(! window.localStorage.zuhrSettings){
@@ -42,7 +41,7 @@ var icBackground=function(){
                     reminderAt:10,
                     eventLong:10,
                     privacy:'public',
-                    status:'available'
+                    status:'opaque'
                 });
             }
             if(! window.localStorage.asrSettings){
@@ -50,7 +49,7 @@ var icBackground=function(){
                     reminderAt:10,
                     eventLong:10,
                     privacy:'public',
-                    status:'available'
+                    status:'opaque'
                 });
             }
             if(! window.localStorage.maghribSettings){
@@ -58,7 +57,7 @@ var icBackground=function(){
                     reminderAt:10,
                     eventLong:10,
                     privacy:'public',
-                    status:'available'
+                    status:'opaque'
                 });
             }
             if(! window.localStorage.ishaSettings){
@@ -66,7 +65,7 @@ var icBackground=function(){
                     reminderAt:10,
                     eventLong:10,
                     privacy:'public',
-                    status:'available'
+                    status:'opaque'
                 });
             }
 
@@ -111,6 +110,7 @@ var icBackground=function(){
                     extension.setBadgeText((timeDeff / 60) + ":" + (timeDeff % 60));
                 });
                 icdb.deleteOldPrayers(null);
+                icProxyService.deleteOldPrayers(null);
             }else{
                 var timeDeff = nextPrayer - new Date().getTime();
                 timeDeff /= (1000 * 60);
@@ -135,6 +135,9 @@ var icBackground=function(){
                         icdb.deleteAllPrayers(function(){
                             icbackground.calendarLast();
                         });
+                        icProxyService.deleteAllPrayers(function(){
+
+                            });
                     }
                 });
 
@@ -151,6 +154,7 @@ var icBackground=function(){
                 }else{
                     lastdate=new Date(date_util.yesterDay("-"));
                 }
+                console.log(lastprayer)
                 var lastFor=parseInt(window.localStorage.lastFor);
                 var date=new Date(date_util.today('-'));
                 date.setTime(date.getTime()+ (lastFor * dayInMilliSecond));
@@ -160,34 +164,53 @@ var icBackground=function(){
                     var daydiff=date.getTime()-lastdate.getTime();
                     daydiff /= dayInMilliSecond;
                     Positioning.getPosition(function(pos){
-                        var month =lastdate.getMonth()+1;
-                        icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
-                            for(var i =0; i < daydiff;i++){
-                                lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
-                                var dayPrayers = null;
-                                if(lastdate.getMonth()+1 == month){
-                                    dayPrayers=ob[lastdate.getDate()];
-                                }else{
-                                    dayPrayers=ob2[lastdate.getDate()];
+                        Positioning.geonamesVars(pos.lat, pos.lng, function(ob){
+                            window.localStorage.gmtOffset=ob.gmtOffset;
+                            window.localStorage.timeZoneId=ob.timezoneId;
+
+                            var month =lastdate.getMonth()+1;
+                            icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
+                                for(var i =0; i < daydiff;i++){
+                                    lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
+                                    var dayPrayers = null;
+                                    if(lastdate.getMonth()+1 == month){
+                                        dayPrayers=ob[lastdate.getDate()];
+                                    }else{
+                                        dayPrayers=ob2[lastdate.getDate()];
+                                    }
+                                    console.log(dayPrayers)
+                                    var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),
+                                        dayPrayers.fajr.split(":")[0],
+                                        dayPrayers.fajr.split(":")[1]);
+                                    var zuhr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.zuhr.split(":")[0],dayPrayers.zuhr.split(":")[1]);
+                                    var asr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.asr.split(":")[0],dayPrayers.asr.split(":")[1]);
+                                    var maghrib=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.maghrib.split(":")[0],dayPrayers.maghrib.split(":")[1]);
+                                    var isha=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.isha.split(":")[0],dayPrayers.isha.split(":")[1]);
+                                    dayPrayers.fajrTime=fajr.getTime();
+                                    dayPrayers.zuhrTime=zuhr.getTime();
+                                    dayPrayers.asrTime=asr.getTime();
+                                    dayPrayers.maghribTime=maghrib.getTime();
+                                    dayPrayers.ishaTime=isha.getTime();
+                                    icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
+                                        console.log('dona');
+                                    });
+                                    icProxyService.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(resp){
+                                        console.log(resp)
+                                    });
+                                //now send to calendar to set new events.
                                 }
-                                var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.fajr.split(":")[0],dayPrayers.fajr.split(":")[1]);
-                                var zuhr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.zuhr.split(":")[0],dayPrayers.zuhr.split(":")[1]);
-                                var asr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.asr.split(":")[0],dayPrayers.asr.split(":")[1]);
-                                var maghrib=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.maghrib.split(":")[0],dayPrayers.maghrib.split(":")[1]);
-                                var isha=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.isha.split(":")[0],dayPrayers.isha.split(":")[1]);
-                                dayPrayers.fajrTime=fajr.getTime();
-                                dayPrayers.zuhrTime=zuhr.getTime();
-                                dayPrayers.asrTime=asr.getTime();
-                                dayPrayers.maghribTime=maghrib.getTime();
-                                dayPrayers.ishaTime=isha.getTime();
-                                icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
-                                    console.log('dona');
-                                });
-                            //now send to calendar to set new events.
-                            }
-                        })
+                            });
+                        });
                     });
                 }
+            });
+        },
+        /**
+         *
+         */
+        authenticate:function(){
+            icProxyService.getAuthSubToken(0, function(ob){
+                window.localStorage.userAuth=ob.authToken;
             });
         }
     }
@@ -257,4 +280,19 @@ Positioning.getPosition = function(fn){
 var icbackground = new icBackground();
 chrome.browserAction.onClicked.addListener(function(tab){
     extension.openOptionPage();
-})
+});
+/**
+ * Handles data sent via chrome.extension.sendRequest().
+ * @param request Object Data sent in the request.
+ * @param sender Object Origin of the request.
+ * @param callback Function The method to call when the request completes.
+ */
+function onRequest(request, sender, callback) {
+    if(request.action == 'authenticate'){
+        icbackground.authenticate();
+    }
+}
+
+// Wire up the listener.
+chrome.extension.onRequest.addListener(onRequest);
+
