@@ -49,6 +49,31 @@ var util={
         return checked;
     },
     /**
+     * get alist of checked elements value in the page.
+     * @return an array of checked elements values.
+     */
+    specificRowsSelected:function(name){
+        var checked=[];
+        $('[name|="'+name+'"]:checkbox').each(function(){
+            if(this.checked){
+                checked.push(this.value);
+            }
+        });
+        return checked;
+    },
+    /**
+     *
+     */
+    radioValue:function(name){
+        var val=null;
+        $("[name|='"+name+"']:radio").each(function(){
+            if(this.checked){
+                val = this.value;
+            }
+        });
+        return val;
+    },
+    /**
      * returns the index of the object in the array, the object must be similar to the array contains. 
      * @param ob the object to get its index.
      * @param array the array to check throw.

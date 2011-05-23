@@ -6,13 +6,14 @@
 
         <!-- styles -->
         <link rel="stylesheet" type="text/css" href="css/options.css" />
-<!--        <link rel="stylesheet" type="text/css" href="css/english.css" />-->
+        <!--        <link rel="stylesheet" type="text/css" href="css/english.css" />-->
 
         <!-- script -->
         <script type="text/javascript" src="js/custom-form-elements.js"></script>
         <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
         <script type="text/javascript" src="../controllers/ICOptions.js"></script>
         <script type="text/javascript" src="../controllers/locals.js"></script>
+        <script type="text/javascript" src="../controllers/util.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -49,8 +50,7 @@
             </div>
             <div class="radio-cont f">
                 <label>
-                    <input type="radio" name="radio" class="styled" />
-        	تبعا للمكان الحالى
+                    <input type="radio" id="current" name="radio" class="styled" /> تبعا للمكان الحالى
                 </label>
 
                 <form action="" onsubmit="return false;">
@@ -60,373 +60,374 @@
                 <div id="map_canvas" class="map">
                 </div>
                 <label>
-                    <input type="radio" name="radio" class="styled" />
-    	تبعا لمفكرة Google
+                    <input id="googleCalendarSettings"  type="radio" name="radio" class="styled" />تبعا لمفكرة Google
                 </label>
             </div>
             <!--reminder method -->
             <div class="titles-bar f">
                 <div class="gred">طريقة التذكير فى مفكرة Google</div>
             </div>
+            <form action="" name="settingsForm" onsubmit="return false;">
+                <div class="f reminder">
+                    <p>
+                        <div class="checkbox-container f checkbox-all">
+                            <input id="alertAll" value="ALL" type="checkbox" name="alertType" class="" />الكل
+                        </div>
 
-            <div class="f reminder">
-                <p>
-                    <div class="checkbox-container f checkbox-all">
-                        <input type="checkbox" name="a" class="styled" />
-    	    الكل
-                    </div>
+                        <div class="checkbox-container f">
+                            <input id="alertALERT" value="ALERT" type="checkbox" name="alertType" class="" />نافذة منبثقة
+                        </div>
 
-                    <div class="checkbox-container f">
-                        <input type="checkbox" name="b" class="styled" />
-    	    نافذة منبثقة
-                    </div>
+                        <div class="checkbox-container f">
+                            <input id="alertEMAIL" value="EMAIL" type="checkbox" name="alertType" class="" />البريد الألكترونى
+                        </div>
 
-                    <div class="checkbox-container f">
-                        <input type="checkbox" name="c" class="styled" />
-    	    البريد الألكترونى
-                    </div>
-
-                    <div class="checkbox-container f">
-                        <input type="checkbox" name="d" class="styled" />
+                        <div class="checkbox-container f">
+                            <input id="alertSMS" value="SMS" type="checkbox" name="alertType" class="" />
     	    خدمة الرسائل القصيرة
-                    </div>
+                        </div>
 
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <div class="titles-bar f">
-                <div class="gred">الحالة & الخصوصية فى مفكرة Google</div>
-            </div>
+                <div class="titles-bar f">
+                    <div class="gred">الحالة & الخصوصية فى مفكرة Google</div>
+                </div>
 
-            <div class="note f-r">سيتم حذف المواقيت غير المختارة من المفكرة Google عند الحفظ</div>
+                <div class="note f-r">سيتم حذف المواقيت غير المختارة من المفكرة Google عند الحفظ</div>
 
-            <div class="pray-times f">
-                <table width="100%" border="0" cellspacing="12" cellpadding="0">
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input id="AllprayersSettings" type="checkbox" name="d" class="styled" />
+                <div class="pray-times f">
+                    <table width="100%" border="0" cellspacing="12" cellpadding="0">
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="AllprayersSettings" type="checkbox" value="ALL" name="eventFor" class="" />
     	   			 كل الصلوات
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="a" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="b" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="c" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="allPrayersReminderTime" name="a" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="allPrayersEventLong" name="b" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="allPrayersPrivacy" name="c" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="d" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="allPrayersStatus" name="d" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input type="checkbox" name="d" class="styled" />
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="fajrPrayer" type="checkbox" value="fajr" name="eventFor" class="" />
     	   			 صلاة الفجر
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="e" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="f" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="g" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="fajrPrayersReminderTime" id="fajr" name="e" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="fajrPrayersEventLong" name="f" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="fajrPrayersPrivacy" name="g" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="h" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="fajrPrayersStatus" name="h" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input type="checkbox" name="d" class="styled" />
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="zuhrPrayer" type="checkbox" value="zuhr" name="eventFor" class="" />
     	   			 صلاة الظهر
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="i" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="j" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="k" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="zuhrPrayersReminderTime" name="i" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="zuhrPrayersEventLong" name="j" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="zuhrPrayersPrivacy" name="k" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="l" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="zuhrPrayersStatus" name="l" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input type="checkbox" name="d" class="styled" />
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="asrPrayer" type="checkbox" value="asr" name="eventFor" class="" />
     	   			 صلاة العصر
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="m" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="n" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="o" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="asrPrayersReminderTime" name="m" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="asrPrayersEventLong" name="n" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="asrPrayersPrivacy" name="o" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="p" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="asrPrayersStatus" name="p" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input type="checkbox" name="d" class="styled" />
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="maghribPrayer" type="checkbox" value="maghrib" name="eventFor" class="" />
     	   			 صلاة المغرب
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="q" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="r" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="s" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="maghribPrayersReminderTime" name="q" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="maghribPrayersEventLong" name="r" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="maghribPrayersPrivacy" name="s" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="t" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="maghribPrayersStatus" name="t" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td width="150">
-                            <div class="checkbox-container f">
-                                <input type="checkbox" name="d" class="styled" />
+                        <tr>
+                            <td width="150">
+                                <div class="checkbox-container f">
+                                    <input id="ishaPrayer" type="checkbox" value="isha" name="eventFor" class="" />
     	   			 صلاة العشاء
-                            </div>
-                        </td>
-                        <td width="200">
-                            <label class="f"> الصلاة بعد الأذان بـ</label>
-                            <div class="checkbox-container f">
-                                <select name="u" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="300">
-                            <label class="f">  لمدة</label>
-                            <div class="checkbox-container f">
-                                <select name="v" class="styled">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
-                            <label class="f"> ق</label>
-                        </td>
-                        <td width="170">
-                            <label class="f"> الخصوصية</label>
-                            <div class="checkbox-container f">
-                                <select name="w" class="styled">
-                                    <option value="public">عام</option>
-                                    <option value="private">خاص</option>
-                                </select>
-                            </div>
+                                </div>
+                            </td>
+                            <td width="200">
+                                <label class="f"> الصلاة بعد الأذان بـ</label>
+                                <div class="checkbox-container f">
+                                    <select id="ishaPrayersReminderTime" name="u" class="styled">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="300">
+                                <label class="f">  لمدة</label>
+                                <div class="checkbox-container f">
+                                    <select id="ishaPrayersEventLong" name="v" class="styled">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <label class="f"> ق</label>
+                            </td>
+                            <td width="170">
+                                <label class="f"> الخصوصية</label>
+                                <div class="checkbox-container f">
+                                    <select id="ishaPrayersPrivacy" name="w" class="styled">
+                                        <option value="public">عام</option>
+                                        <option value="private">خاص</option>
+                                    </select>
+                                </div>
 
-                        </td>
-                        <td>
-                            <label class="f"> الحاله</label>
-                            <div class="checkbox-container f">
-                                <select name="x" class="styled">
-                                    <option value="opaque">عام</option>
-                                    <option value="transparent">خاص</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                            <td>
+                                <label class="f"> الحاله</label>
+                                <div class="checkbox-container f">
+                                    <select id="ishaPrayersStatus" name="x" class="styled">
+                                        <option value="opaque">عام</option>
+                                        <option value="transparent">خاص</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
 
-            </div>
+                </div>
 
-            <div class="titles-bar f">
-                <div class="gred">المدة الزمنية لتسجيل مواقيت الصلاة مفكرة Google</div>
-            </div>
+                <div class="titles-bar f">
+                    <div class="gred">المدة الزمنية لتسجيل مواقيت الصلاة مفكرة Google</div>
+                </div>
 
-            <div class="radio-cont f">
-                <label class="f" style="margin-left:20px;">
-                    <input type="radio" value="7" name="status" class="styled" />
+                <div class="radio-cont f">
+                    <label class="f" style="margin-left:20px;">
+                        <input id="lastFor-7" type="radio" value="7" name="status" class="styled" />
         	أسبوعى 
-                </label>
-                <label class="f">
-                    <input type="radio" value="30" name="status" class="styled" />
+                    </label>
+                    <label class="f">
+                        <input id="lastFor-30" type="radio" value="30" name="status" class="styled" />
         	شهرى
-                </label>
+                    </label>
 
-            </div>
-            <div class="button-cont f">
-
-                <input type="button" class="button" value="حفــظ" />
-                <input type="button" class="button" value="إلغاء التعديلات" />
-            </div>
-
+                </div>
+                <div class="button-cont f">
+                    <input type="button" id="save" class="button" value="حفــظ" />
+                    <input type="button" id="reset" class="button" value="إلغاء التعديلات" />
+                </div>
+            </form>
         </div>
     </body>
 </html>

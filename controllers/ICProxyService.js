@@ -7,8 +7,8 @@ var ProxyService = {
      * Parameters:
      * lat=?&lng=?&yy=?&mm=?&gmt=?&m=json
      */
-//    XhanchPrayersURL : 'http://xhanch.com/api/islamic-get-prayer-time.php?',
-    XhanchPrayersURL : 'http://localhost:88/temp/prayer.json?',
+    XhanchPrayersURL : 'http://xhanch.com/api/islamic-get-prayer-time.php?',
+//    XhanchPrayersURL : 'http://localhost:88/temp/prayer.json?',
     formXhanchPrayersURL:function(lat,lng,yy,mm,gmt){
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
@@ -97,10 +97,12 @@ var ICProxyService = function(ob){
             var asrSettings=JSON.parse(window.localStorage.asrSettings);
             var maghribSettings=JSON.parse(window.localStorage.maghribSettings);
             var ishaSettings=JSON.parse(window.localStorage.ishaSettings);
+            var eventFor=JSON.parse(window.localStorage.eventFor);
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.insertURL,
                 data:{
                     authToken:authToken,
+                    eventFor:eventFor,
                     alertType:JSON.parse(window.localStorage.alertType),
                     gmtOffset:window.localStorage.gmtOffset,
                     timezoneId:window.localStorage.timeZoneId,
