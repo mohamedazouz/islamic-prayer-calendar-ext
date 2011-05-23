@@ -129,9 +129,7 @@ var icBackground=function(){
                         icdb.deleteAllPrayers(function(){
                             icbackground.calendarLast();
                         });
-                        icProxyService.deleteAllPrayers(function(){
-
-                            });
+                        icProxyService.deleteAllPrayers(function(){});
                     }
                 });
 
@@ -204,6 +202,15 @@ var icBackground=function(){
             icProxyService.getAuthSubToken(0, function(ob){
                 window.localStorage.userAuth=ob.authToken;
             });
+        },
+        /**
+         *
+         */
+        resetCalendar:function(){
+            icdb.deleteAllPrayers(function(){
+                icbackground.calendarLast();
+            });
+            icProxyService.deleteAllPrayers(function(){});
         }
     }
     $(function(){
@@ -282,6 +289,9 @@ chrome.browserAction.onClicked.addListener(function(tab){
 function onRequest(request, sender, callback) {
     if(request.action == 'authenticate'){
         icbackground.authenticate();
+    }
+    if(request.action == 'resetSettings'){
+        icbackground.resetCalendar();
     }
 }
 
