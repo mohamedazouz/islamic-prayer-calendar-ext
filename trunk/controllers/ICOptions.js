@@ -14,16 +14,6 @@ icOptions = function(){
             }
         },
         domEvents:function(){
-            //stored vars
-            var fajrS=JSON.parse(window.localStorage.fajrSettings);
-            var zuhrS=JSON.parse(window.localStorage.zuhrSettings);
-            var asrS=JSON.parse(window.localStorage.asrSettings);
-            var maghribS=JSON.parse(window.localStorage.maghribSettings);
-            var ishaS=JSON.parse(window.localStorage.ishaSettings);
-            var eventFor=JSON.parse(window.localStorage.eventFor);
-            var alertType=JSON.parse(window.localStorage.alertType);
-            var lastFor=window.localStorage.lastFor;
-
             //set dom events
             $("#AllprayersSettings").change(function(){
                 $("#fajrPrayer , #zuhrPrayer , #asrPrayer , #maghribPrayer , #ishaPrayer ,#fajrPrayersReminderTime,"+
@@ -44,76 +34,89 @@ icOptions = function(){
             });
 
             $("#save").click(function(){
-                window.localStorage.setup = true;
-                //saving vars
-                window.localStorage.timeZoneId=timezoneId;
-                window.localStorage.gmtOffset=gmt;
-                window.localStorage.position=JSON.stringify({
-                    lat:lat,
-                    lng:lng
-                });
-
-                window.localStorage.lastFor = util.radioValue("status");
-                window.localStorage.alertType =JSON.stringify( util.specificRowsSelected("alertType"));
-                var eventFor=util.specificRowsSelected("eventFor");
-                window.localStorage.eventFor =JSON.stringify( eventFor);
-
-                if($.inArray("ALL", eventFor) != -1){
-                    var allSettings=JSON.stringify({
-                        reminderAt:$("#allPrayersReminderTime").val(),
-                        eventLong:$("#allPrayersEventLong").val(),
-                        privacy:$("#allPrayersPrivacy").val(),
-                        status:$("#allPrayersStatus").val()
-                    });
-                    window.localStorage.fajrSettings=allSettings;
-                    window.localStorage.zuhrSettings=allSettings;
-                    window.localStorage.asrSettings=allSettings;
-                    window.localStorage.maghribSettings=allSettings;
-                    window.localStorage.ishaSettings=allSettings;
-                }else{
-                    //{"reminderAt":10,"eventLong":10,"privacy":"public","status":"opaque"}
-                    window.localStorage.fajrSettings=JSON.stringify({
-                        reminderAt:$("#fajrPrayersReminderTime").val(),
-                        eventLong:$("#fajrPrayersEventLong").val(),
-                        privacy:$("#fajrPrayersPrivacy").val(),
-                        status:$("#fajrPrayersStatus").val()
-                    });
-                
-                    window.localStorage.zuhrSettings=JSON.stringify({
-                        reminderAt:$("#zuhrPrayersReminderTime").val(),
-                        eventLong:$("#zuhrPrayersEventLong").val(),
-                        privacy:$("#zuhrPrayersPrivacy").val(),
-                        status:$("#zuhrPrayersStatus").val()
-                    });
-                
-                    window.localStorage.asrSettings=JSON.stringify({
-                        reminderAt:$("#asrPrayersReminderTime").val(),
-                        eventLong:$("#asrPrayersEventLong").val(),
-                        privacy:$("#asrPrayersPrivacy").val(),
-                        status:$("#asrPrayersStatus").val()
-                    });
-                
-                    window.localStorage.maghribSettings=JSON.stringify({
-                        reminderAt:$("#maghribPrayersReminderTime").val(),
-                        eventLong:$("#maghribPrayersEventLong").val(),
-                        privacy:$("#maghribPrayersPrivacy").val(),
-                        status:$("#maghribPrayersStatus").val()
-                    });
-                    window.localStorage.ishaSettings=JSON.stringify({
-                        reminderAt:$("#ishaPrayersReminderTime").val(),
-                        eventLong:$("#ishaPrayersEventLong").val(),
-                        privacy:$("#ishaPrayersPrivacy").val(),
-                        status:$("#ishaPrayersStatus").val()
-                    });
-                }
-
+                icOptions.saveSettings();
             });
             $("#reset").click(function(){
                 window.location.reload();
             });
-            
+        },
+        saveSettings:function(){
+            window.localStorage.setup = true;
+            //saving vars
+            window.localStorage.timeZoneId=timezoneId;
+            window.localStorage.gmtOffset=gmt;
+            window.localStorage.position=JSON.stringify({
+                lat:lat,
+                lng:lng
+            });
 
-            //set Page last vars
+            window.localStorage.lastFor = util.radioValue("status");
+            window.localStorage.alertType =JSON.stringify( util.specificRowsSelected("alertType"));
+            var eventFor=util.specificRowsSelected("eventFor");
+            window.localStorage.eventFor =JSON.stringify( eventFor);
+
+            if($.inArray("ALL", eventFor) != -1){
+                var allSettings=JSON.stringify({
+                    reminderAt:$("#allPrayersReminderTime").val(),
+                    eventLong:$("#allPrayersEventLong").val(),
+                    privacy:$("#allPrayersPrivacy").val(),
+                    status:$("#allPrayersStatus").val()
+                });
+                window.localStorage.fajrSettings=allSettings;
+                window.localStorage.zuhrSettings=allSettings;
+                window.localStorage.asrSettings=allSettings;
+                window.localStorage.maghribSettings=allSettings;
+                window.localStorage.ishaSettings=allSettings;
+            }else{
+                window.localStorage.fajrSettings=JSON.stringify({
+                    reminderAt:$("#fajrPrayersReminderTime").val(),
+                    eventLong:$("#fajrPrayersEventLong").val(),
+                    privacy:$("#fajrPrayersPrivacy").val(),
+                    status:$("#fajrPrayersStatus").val()
+                });
+
+                window.localStorage.zuhrSettings=JSON.stringify({
+                    reminderAt:$("#zuhrPrayersReminderTime").val(),
+                    eventLong:$("#zuhrPrayersEventLong").val(),
+                    privacy:$("#zuhrPrayersPrivacy").val(),
+                    status:$("#zuhrPrayersStatus").val()
+                });
+
+                window.localStorage.asrSettings=JSON.stringify({
+                    reminderAt:$("#asrPrayersReminderTime").val(),
+                    eventLong:$("#asrPrayersEventLong").val(),
+                    privacy:$("#asrPrayersPrivacy").val(),
+                    status:$("#asrPrayersStatus").val()
+                });
+
+                window.localStorage.maghribSettings=JSON.stringify({
+                    reminderAt:$("#maghribPrayersReminderTime").val(),
+                    eventLong:$("#maghribPrayersEventLong").val(),
+                    privacy:$("#maghribPrayersPrivacy").val(),
+                    status:$("#maghribPrayersStatus").val()
+                });
+                window.localStorage.ishaSettings=JSON.stringify({
+                    reminderAt:$("#ishaPrayersReminderTime").val(),
+                    eventLong:$("#ishaPrayersEventLong").val(),
+                    privacy:$("#ishaPrayersPrivacy").val(),
+                    status:$("#ishaPrayersStatus").val()
+                });
+            }
+            chrome.extension.sendRequest({
+                action:"resetSettings"
+            });
+        },
+        setOldSettings:function(){
+            //stored vars
+            var fajrS=JSON.parse(window.localStorage.fajrSettings);
+            var zuhrS=JSON.parse(window.localStorage.zuhrSettings);
+            var asrS=JSON.parse(window.localStorage.asrSettings);
+            var maghribS=JSON.parse(window.localStorage.maghribSettings);
+            var ishaS=JSON.parse(window.localStorage.ishaSettings);
+            var eventFor=JSON.parse(window.localStorage.eventFor);
+            var alertType=JSON.parse(window.localStorage.alertType);
+            var lastFor=window.localStorage.lastFor;
+            
             if($.inArray("ALL", eventFor) != -1){
                 $("#AllprayersSettings").attr('checked',true);
                 $("#AllprayersSettings").trigger("change");
@@ -132,7 +135,7 @@ icOptions = function(){
             $("#googleCalendarSettings").parent('label').hide();
 
             $("#lastFor-"+lastFor).attr('checked',true);
-            
+
             $("#fajrPrayersReminderTime").val(fajrS.reminderAt);
             $("#fajrPrayersEventLong").val(fajrS.eventLong);
             $("#fajrPrayersPrivacy").val(fajrS.privacy);
