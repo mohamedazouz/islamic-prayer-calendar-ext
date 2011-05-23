@@ -43,6 +43,7 @@ img{
 }
 .styled{
 	width:60px!important;
+        cursor: pointer;
 	}
 
 /* page style */
@@ -130,6 +131,7 @@ img{
 	height:26px;
 	color:#fff;
 	font:12px Tahoma, Geneva, sans-serif;
+        cursor: pointer;
 	}
 .map{
 	width:850px;

@@ -23,10 +23,10 @@ var icBackground=function(){
                 window.localStorage.lastFor = 7;
             }
             if(! window.localStorage.alertType){
-                window.localStorage.alertType = JSON.stringify(['all']);
+                window.localStorage.alertType = JSON.stringify(['ALL']);
             }
             if(! window.localStorage.eventFor){
-                window.localStorage.eventFor = JSON.stringify(['all']);
+                window.localStorage.eventFor = JSON.stringify(['ALL']);
             }
             if(! window.localStorage.fajrSettings){
                 window.localStorage.fajrSettings = JSON.stringify({
@@ -86,12 +86,6 @@ var icBackground=function(){
             icbackground.nextPrayerBadge();
             icbackground.calendarLast();
             icbackground.updatePosition();
-        },
-        /**
-         * update the calendar.
-         */
-        updateCalendar:function(){
-
         },
         /**
          * shows the badge text for next prayer time left.
@@ -154,7 +148,6 @@ var icBackground=function(){
                 }else{
                     lastdate=new Date(date_util.yesterDay("-"));
                 }
-                console.log(lastprayer)
                 var lastFor=parseInt(window.localStorage.lastFor);
                 var date=new Date(date_util.today('-'));
                 date.setTime(date.getTime()+ (lastFor * dayInMilliSecond));
@@ -178,7 +171,6 @@ var icBackground=function(){
                                     }else{
                                         dayPrayers=ob2[lastdate.getDate()];
                                     }
-                                    console.log(dayPrayers)
                                     var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),
                                         dayPrayers.fajr.split(":")[0],
                                         dayPrayers.fajr.split(":")[1]);
@@ -192,7 +184,7 @@ var icBackground=function(){
                                     dayPrayers.maghribTime=maghrib.getTime();
                                     dayPrayers.ishaTime=isha.getTime();
                                     icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
-                                        console.log('dona');
+                                        console.log('inserting prayers done.');
                                     });
                                     icProxyService.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(resp){
                                         console.log(resp)
