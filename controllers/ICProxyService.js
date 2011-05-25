@@ -13,7 +13,8 @@ var ProxyService = {
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
     //proxyRootURL:'http://calendar.activedd.com',
-    proxyRootURL:'http://localhost:8084/cp',
+//    proxyRootURL:'http://localhost:8084/cp',
+    proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
@@ -48,10 +49,10 @@ var ICProxyService = function(ob){
          * delete prayers that in the past.
          */
         deleteOldPrayers:function(fn){
-            if(! window.localStorage.authToken){
+            if(! window.localStorage.userAuth){
                 return;
             }
-            var authToken=window.localStorage.authToken;
+            var authToken=window.localStorage.userAuth;
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.deleteOldURL,
                 dataType:'json',
@@ -67,10 +68,10 @@ var ICProxyService = function(ob){
          * delete all prayers events.
          */
         deleteAllPrayers:function(fn){
-            if(! window.localStorage.authToken){
+            if(! window.localStorage.userAuth){
                 return;
             }
-            var authToken=window.localStorage.authToken;
+            var authToken=window.localStorage.userAuth;
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.deleteAllURL,
                 dataType:'json',
@@ -162,7 +163,7 @@ var ICProxyService = function(ob){
                 success:function(ob){
                     if((! ob || ob.status != '200')&& count < 60){
                         window.setTimeout(function (){
-                            proxy.getAuthSubToken(count+1, handler);
+                            icProxyService.getAuthSubToken(count+1, handler);
                         }, 1000);
                     }else{
                         handler(ob);
@@ -171,7 +172,7 @@ var ICProxyService = function(ob){
                 error:function(){
                     if(count<60){
                         window.setTimeout(function(){
-                            proxy.getAuthSubToken(count+1, handler);
+                            icProxyService.getAuthSubToken(count+1, handler);
                         }, 1000);
                     }
                 }

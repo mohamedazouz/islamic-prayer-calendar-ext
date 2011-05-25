@@ -39,6 +39,7 @@ icOptions = function(){
             $("#reset").click(function(){
                 window.location.reload();
             });
+            icOptions.setOldSettings();
         },
         saveSettings:function(){
             window.localStorage.setup = true;
