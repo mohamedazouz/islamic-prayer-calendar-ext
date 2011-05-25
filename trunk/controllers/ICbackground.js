@@ -97,6 +97,9 @@ var icBackground=function(){
             }
             if(nextPrayer == null || nextPrayer < new Date().getTime()){
                 icdb.getNextPrayer(new Date().getTime(), function(ob){
+                    if(!ob){
+                        return;
+                    }
                     nextPrayer = ob.datetime;
                     window.localStorage.nextPrayer = nextPrayer;
                     var timeDeff = nextPrayer - new Date().getTime();
@@ -104,7 +107,9 @@ var icBackground=function(){
                     extension.setBadgeText((timeDeff / 60) + ":" + (timeDeff % 60));
                 });
                 icdb.deleteOldPrayers(null);
-                icProxyService.deleteOldPrayers(null);
+                icProxyService.deleteOldPrayers(function(rs){
+                    console.log(rs)
+                });
             }else{
                 var timeDeff = nextPrayer - new Date().getTime();
                 timeDeff /= (1000 * 60);
@@ -184,7 +189,7 @@ var icBackground=function(){
                                     icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
                                         console.log('inserting prayers done.');
                                     });
-                                    icProxyService.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(resp){
+                                    icProxyService.insertDayPrayer(dayPrayers, function(resp){
                                         console.log(resp)
                                     });
                                 //now send to calendar to set new events.

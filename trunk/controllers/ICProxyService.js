@@ -8,12 +8,12 @@ var ProxyService = {
      * lat=?&lng=?&yy=?&mm=?&gmt=?&m=json
      */
     XhanchPrayersURL : 'http://xhanch.com/api/islamic-get-prayer-time.php?',
-//    XhanchPrayersURL : 'http://localhost:88/temp/prayer.json?',
+    //    XhanchPrayersURL : 'http://localhost:88/temp/prayer.json?',
     formXhanchPrayersURL:function(lat,lng,yy,mm,gmt){
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
     //proxyRootURL:'http://calendar.activedd.com',
-//    proxyRootURL:'http://localhost:8084/cp',
+    //    proxyRootURL:'http://localhost:8084/cp',
     proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
@@ -88,8 +88,17 @@ var ICProxyService = function(ob){
          * request parameters: [day, fajrObject, zuhrObject, asrObject, maghribObject, ishaObject]
          * Object must contains match the following {time sttime, busytime, privacy, status}
          */
-        insertDayPrayer:function(prayerDay,date,fn){
+        insertDayPrayer:function(prayerDay,fn,count){
             if(! window.localStorage.userAuth){
+                if(! count){
+                    count = 1;
+                }
+                count++;
+                if(count < 6){
+                    window.setTimeout(function(){
+                        icProxyService.insertDayPrayer(prayerDay, fn,count);
+                    }, 10 * 1000);
+                }
                 return;
             }
             var authToken=window.localStorage.userAuth;
