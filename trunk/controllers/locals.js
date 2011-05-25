@@ -5,10 +5,74 @@
  * set extra css file path and name you want to add to the RTLStyle variable.
  */
 var Mylocals={
-    ar:{},
-    en:{}
+    ar:{
+        "setPrayerTimes":"ضبط مواقيت الصلاة",
+        "location":"المكان",
+        "currenPosition":"تبعا للموقع الحالى",
+        "gcalSettings":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":""
+    },
+    en:{
+        "setPrayerTimes":"",
+        "location":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":""
+    }
 }
-var RTLStyle='';
+var RTLStyle='css/english.css';
 var setLocals = function(){
     function getNavigatorLang (){
         var lang=window.navigator.language;
@@ -24,7 +88,7 @@ var setLocals = function(){
         window.localStorage.lang = getNavigatorLang();
     }
     var lang=window.localStorage.lang;
-    if(lang == 'ar'){
+    if(lang == 'en'){
         var link=document.createElement("link");
         link.setAttribute("href", RTLStyle);
         link.setAttribute("rel", "stylesheet");
