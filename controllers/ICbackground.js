@@ -131,10 +131,11 @@ var icBackground=function(){
                     if(Positioning.latLngChanged(position, oldPosition)){
                         //position changed, do what ever you do when the position changed.
                         //delete the old calendar events, create new events for the upcoming days.
-                        icdb.deleteAllPrayers(function(){
-                            icbackground.calendarLast();
+                        icProxyService.deleteAllPrayers(function(){
+                            icdb.deleteAllPrayers(function(){
+                                icbackground.calendarLast();
+                            });
                         });
-                        icProxyService.deleteAllPrayers(function(){});
                     }
                 });
 
@@ -212,10 +213,11 @@ var icBackground=function(){
          *
          */
         resetCalendar:function(){
-            icdb.deleteAllPrayers(function(){
-                icbackground.calendarLast();
+            icProxyService.deleteAllPrayers(function(){
+                icdb.deleteAllPrayers(function(){
+                    icbackground.calendarLast();
+                });
             });
-            icProxyService.deleteAllPrayers(function(){});
         }
     }
     $(function(){
