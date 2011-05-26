@@ -122,6 +122,21 @@ icOptions = function(){
                 $("#AllprayersSettings").attr('checked',true);
                 $("#AllprayersSettings").trigger("change");
             }
+            if($.inArray("fajr", eventFor) != -1){
+                $("#fajrPrayer").attr('checked',true);
+            }
+            if($.inArray("zuhr", eventFor) != -1){
+                $("#zuhrPrayer").attr('checked',true);
+            }
+            if($.inArray("asr", eventFor) != -1){
+                $("#asrPrayer").attr('checked',true);
+            }
+            if($.inArray("maghrib", eventFor) != -1){
+                $("#maghribPrayer").attr('checked',true);
+            }
+            if($.inArray("isha", eventFor) != -1){
+                $("#ishaPrayer").attr('checked',true);
+            }
 
             if($.inArray("ALL", alertType) != -1){
                 $("#alertAll").attr('checked',true);
