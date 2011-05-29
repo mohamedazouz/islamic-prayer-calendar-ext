@@ -13,8 +13,8 @@ var ProxyService = {
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
     //proxyRootURL:'http://calendar.activedd.com',
-//    proxyRootURL:'http://localhost:8084/cp',
-    proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
+    proxyRootURL:'http://localhost:8084/cp',
+//    proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
@@ -101,13 +101,16 @@ var ICProxyService = function(ob){
                 }
                 return;
             }
+            var eventFor=JSON.parse(window.localStorage.eventFor);
+            if(eventFor.length == 0){
+                return;
+            }
             var authToken=window.localStorage.userAuth;
             var fajrSettings=JSON.parse(window.localStorage.fajrSettings);
             var zuhrSettings=JSON.parse(window.localStorage.zuhrSettings);
             var asrSettings=JSON.parse(window.localStorage.asrSettings);
             var maghribSettings=JSON.parse(window.localStorage.maghribSettings);
             var ishaSettings=JSON.parse(window.localStorage.ishaSettings);
-            var eventFor=JSON.parse(window.localStorage.eventFor);
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.insertURL,
                 data:{
