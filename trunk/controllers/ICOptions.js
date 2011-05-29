@@ -54,6 +54,7 @@ icOptions = function(){
             window.localStorage.lastFor = util.radioValue("status");
             window.localStorage.alertType =JSON.stringify( util.specificRowsSelected("alertType"));
             var eventFor=util.specificRowsSelected("eventFor");
+            console.log(eventFor);
             window.localStorage.eventFor =JSON.stringify( eventFor);
 
             if($.inArray("ALL", eventFor) != -1){
