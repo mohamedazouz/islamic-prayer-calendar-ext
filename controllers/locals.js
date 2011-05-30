@@ -103,9 +103,12 @@ var setLocals = function(){
     if(lang == 'en'){
         var link=document.createElement("link");
         link.setAttribute("href", RTLStyle);
+        link.setAttribute("id", "NewStyle");
         link.setAttribute("rel", "stylesheet");
         link.setAttribute("type", "text/css");
         $('head').append(link);
+    }else{
+        $("#NewStyle").remove();
     }
     try{
         $("*").each(function(){
@@ -123,6 +126,6 @@ $(function(){
     $("#langChooser").val(window.localStorage.lang);
     $("#langChooser").change(function(){
         window.localStorage.lang=this.value;
-        window.location.reload();
+        setLocals();
     });
 })
