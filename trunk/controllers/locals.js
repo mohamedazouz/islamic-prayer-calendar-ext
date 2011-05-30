@@ -69,7 +69,7 @@ var Mylocals={
         "weakly":"Weekly",
         "monthly":"Monthly",
         "save":"Save",
-        "cancel":"Cancel modifications",
+        "cancel":"Cancel",
         "allprayers":"All",
         "fajrPrayer":"Fajr Prayer",
         "zuhrPrayer":"Dhuhr Prayer",
