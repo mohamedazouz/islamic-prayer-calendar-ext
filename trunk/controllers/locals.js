@@ -1,4 +1,4 @@
-/*
+﻿/*
  * changing locals to page accourding to the presetted locals or from navegator local language.
  * How to : add attribute local to each element you want (i.e.: <div local="localvariable"> Some Text </div> ) to set it's local language and add local value to Mylocals variable for each language
  * you want to view (i.e.:  Mylocals={ar:{localvariable:'Some Text In Arabic'},en:{localvariable:'Some Text in English'}} ).
@@ -13,11 +13,11 @@ var Mylocals={
         "Gcalendar":"تبعا لتقويم Google",
         "reminderType":"طريقة التذكير طبقاً لتقويم Google",
         "all":"الكل",
-        "popup":"نا�?ذة منبثقة",
+        "popup":"نافذة منبثقة",
         "email":"بريد إلكترونى",
         "sms":"رسالة قصيرة",
         "privacysettings":"الحالة و الخصوصية لصلاة طبقاً لتقويم Google",
-        "notation":" سيظهر �?ى تقويم Google مواقيت الصلاة المختارة �?قط  ",
+        "notation":" سيظهر فى تقويم Google مواقيت الصلاة المختارة فقط  ",
         "alertAfter":"بدأ الصلاة بعد الأذان بـ (دقيقة/دقائق)",
         "min":"(دقيقة/دقائق)",
         "for":"لمدة",
@@ -27,14 +27,14 @@ var Mylocals={
         "status":"الحاله",
         "general":"عام",
         "private":"خاص",
-        "default":"ا�?تراضى",
+        "default":"افتراضى",
         "saveFor":"المدة الزمنية لتسجيل مواقيت الصلاة طبقاً لتقويم Google",
         "weakly":"أسبوعى",
         "monthly":"شهرى",
-        "save":"ح�?ظ",
+        "save":"حفظ",
         "cancel":"الغاء التعديلات",
         "allprayers":"كل الصلوات",
-        "fajrPrayer":"صلاة ال�?جر",
+        "fajrPrayer":"صلاة الفجر",
         "zuhrPrayer":"صلاة الظهر",
         "asrPrayer":"صلاة العصر",
         "maghribPrayer":"صلاة المغرب",
@@ -55,7 +55,7 @@ var Mylocals={
         "sms":"SMS",
         "privacysettings":"Status & Privacy for players in Google Calender",
         "notation":"Only the selected Prayer timing will be exist in Google Calender",
-        "alertAfter":"Prayer After",
+        "alertAfter":"Prayer After (Min/Mins)",
         "min":"(Min/Mins)",
         "for":"For",
         "privacy":"Privacy",
