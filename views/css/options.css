@@ -163,3 +163,14 @@ img{
 	font-size:12px;
 	padding-bottom:40px;
 	}
+.language-menu  span{
+	height: 16px;
+	line-height: 15px;
+}
+.language-menu  div{
+	float:right;
+	margin-right: -33px;
+	padding:4px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#1c1c1c), to(#565656));
+	box-shadow:0 0 4px #606060;
+}
