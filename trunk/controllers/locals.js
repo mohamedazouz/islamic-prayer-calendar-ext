@@ -1,4 +1,4 @@
-﻿/*
+/*
  * changing locals to page accourding to the presetted locals or from navegator local language.
  * How to : add attribute local to each element you want (i.e.: <div local="localvariable"> Some Text </div> ) to set it's local language and add local value to Mylocals variable for each language
  * you want to view (i.e.:  Mylocals={ar:{localvariable:'Some Text In Arabic'},en:{localvariable:'Some Text in English'}} ).
@@ -40,7 +40,9 @@ var Mylocals={
         "maghribPrayer":"صلاة المغرب",
         "ishaPrayer":"صلاة العشاء",
         "ar":"العربية",
-        "en":"English"
+        "en":"English",
+        "lang":"اللغة",
+        "saved":"تم حفظ الاعدادات"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -77,7 +79,9 @@ var Mylocals={
         "maghribPrayer":"Maghrib Prayer",
         "ishaPrayer":"'Isha' Prayer",
         "ar":"العربية",
-        "en":"English"
+        "en":"English",
+        "lang":"Lang",
+        "saved":"Settings Saved"
     }
 }
 var RTLStyle='css/english.css';
