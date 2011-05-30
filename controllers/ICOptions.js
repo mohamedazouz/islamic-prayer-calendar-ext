@@ -42,6 +42,14 @@ icOptions = function(){
             icOptions.setOldSettings();
         },
         saveSettings:function(){
+            $("#saved").fadeIn(100, function(){
+                $("#save").attr("disabled", true);
+                window.setTimeout(function(){
+                    $("#saved").fadeOut(100, function(){
+                        $("#save").attr("disabled", false);
+                    });
+                },5000);
+            });
             window.localStorage.setup = true;
             //saving vars
             window.localStorage.timeZoneId=timezoneId;

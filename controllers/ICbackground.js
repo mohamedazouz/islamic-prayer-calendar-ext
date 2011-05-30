@@ -104,7 +104,7 @@ var icBackground=function(){
                     window.localStorage.nextPrayer = nextPrayer;
                     var timeDeff = nextPrayer - new Date().getTime();
                     timeDeff /= (1000 * 60);
-                    extension.setBadgeText((timeDeff / 60) + ":" + (timeDeff % 60));
+                    extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
                 });
                 icdb.deleteOldPrayers(null);
                 icProxyService.deleteOldPrayers(function(rs){
