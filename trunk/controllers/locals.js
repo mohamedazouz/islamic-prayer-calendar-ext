@@ -13,11 +13,11 @@ var Mylocals={
         "Gcalendar":"تبعا لتقويم Google",
         "reminderType":"طريقة التذكير طبقاً لتقويم Google",
         "all":"الكل",
-        "popup":"نافذة منبثقة",
+        "popup":"نا�?ذة منبثقة",
         "email":"بريد إلكترونى",
         "sms":"رسالة قصيرة",
         "privacysettings":"الحالة و الخصوصية لصلاة طبقاً لتقويم Google",
-        "notation":" سيظهر فى تقويم Google مواقيت الصلاة المختارة فقط  ",
+        "notation":" سيظهر �?ى تقويم Google مواقيت الصلاة المختارة �?قط  ",
         "alertAfter":"بدأ الصلاة بعد الأذان بـ (دقيقة/دقائق)",
         "min":"(دقيقة/دقائق)",
         "for":"لمدة",
@@ -27,14 +27,14 @@ var Mylocals={
         "status":"الحاله",
         "general":"عام",
         "private":"خاص",
-        "default":"افتراضى",
+        "default":"ا�?تراضى",
         "saveFor":"المدة الزمنية لتسجيل مواقيت الصلاة طبقاً لتقويم Google",
         "weakly":"أسبوعى",
         "monthly":"شهرى",
-        "save":"حفظ",
+        "save":"ح�?ظ",
         "cancel":"الغاء التعديلات",
         "allprayers":"كل الصلوات",
-        "fajrPrayer":"صلاة الفجر",
+        "fajrPrayer":"صلاة ال�?جر",
         "zuhrPrayer":"صلاة الظهر",
         "asrPrayer":"صلاة العصر",
         "maghribPrayer":"صلاة المغرب",
@@ -55,7 +55,7 @@ var Mylocals={
         "sms":"SMS",
         "privacysettings":"Status & Privacy for players in Google Calender",
         "notation":"Only the selected Prayer timing will be exist in Google Calender",
-        "alertAfter":"Prayer After (Min/Mins)",
+        "alertAfter":"Prayer After",
         "min":"(Min/Mins)",
         "for":"For",
         "privacy":"Privacy",
