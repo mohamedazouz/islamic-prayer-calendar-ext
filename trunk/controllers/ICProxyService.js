@@ -13,7 +13,7 @@ var ProxyService = {
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
     //proxyRootURL:'http://calendar.activedd.com',
-//    proxyRootURL:'http://localhost:8084/cp',
+    //    proxyRootURL:'http://localhost:8084/cp',
     proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
@@ -173,16 +173,18 @@ var ICProxyService = function(ob){
                 url:ProxyService.proxyRootURL+ProxyService.fetchToken,
                 dataType:'json',
                 success:function(ob){
-                    if((! ob || ob.status != '200')&& count < 60){
-                        window.setTimeout(function (){
-                            icProxyService.getAuthSubToken(count+1, handler);
-                        }, 1000);
+                    if((! ob || ob.status != '200')){
+                        if(count < 60){
+                            window.setTimeout(function (){
+                                icProxyService.getAuthSubToken(count+1, handler);
+                            }, 1000);
+                        }
                     }else{
                         handler(ob);
                     }
                 },
                 error:function(){
-                    if(count<60){
+                    if(count < 60){
                         window.setTimeout(function(){
                             icProxyService.getAuthSubToken(count+1, handler);
                         }, 1000);
