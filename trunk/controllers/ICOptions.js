@@ -2,6 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+var background=chrome.extension.getBackgroundPage();
+
+var lat,lng,gmt,country,countryCode,timezoneId,city,formatted_address;
+var map,marker,geocoder,center;
 icOptions = function(){
     var icOptions={
         initialize:function(){
@@ -42,6 +46,7 @@ icOptions = function(){
             icOptions.setOldSettings();
         },
         saveSettings:function(){
+            console.log(lat,lng)
             $("#saved").fadeIn(100, function(){
                 $("#save").attr("disabled", true);
                 window.setTimeout(function(){
@@ -62,7 +67,6 @@ icOptions = function(){
             window.localStorage.lastFor = util.radioValue("status");
             window.localStorage.alertType =JSON.stringify( util.specificRowsSelected("alertType"));
             var eventFor=util.specificRowsSelected("eventFor");
-            console.log(eventFor);
             window.localStorage.eventFor =JSON.stringify( eventFor);
 
             if($.inArray("ALL", eventFor) != -1){
@@ -193,12 +197,7 @@ icOptions = function(){
     });
     return icOptions;
 }
-var icOptions= new icOptions();
 
-var background=chrome.extension.getBackgroundPage();
-
-var lat,lng,gmt,country,countryCode,timezoneId,city,formatted_address;
-var map,marker,geocoder,center;
 var Positioning={
     initialize:function(){
         var myOptions = {
@@ -211,7 +210,11 @@ var Positioning={
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
         // setting the map center to the current position
-        moveToCurrent();
+        var position = null;
+        if( window.localStorage.position){
+            position = JSON.parse(window.localStorage.position);
+        }
+        moveToCurrent(position);
 
         //adding lister to changer lat,lng as the zoom changed.
         google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -241,25 +244,32 @@ var Positioning={
             map.setCenter(center);
         }
 
-        function moveToCurrent(){
-            // Try W3C Geolocation (Preferred)
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                    marker = new google.maps.Marker({
-                        map: map,
-                        position: center
+        function setMapCenter(lat,lng){
+            center = new google.maps.LatLng(lat,lng);
+            marker = new google.maps.Marker({
+                map: map,
+                position: center
+            });
+            marker.setDraggable(true);
+            google.maps.event.addListener(marker,'dragend',function(){
+                center=marker.getPosition();
+                map.setCenter(center);
+                Positioning.newPosition();
+            });
+            map.setCenter(center);
+        }
+
+        function moveToCurrent(oldPos){
+            if(oldPos){
+                setMapCenter(oldPos.lat,oldPos.lng);
+            }else{
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        setMapCenter(position.coords.latitude,position.coords.longitude);
+                    }, function() {
+                        handleNoGeolocation();
                     });
-                    marker.setDraggable(true);
-                    google.maps.event.addListener(marker,'dragend',function(){
-                        center=marker.getPosition();
-                        map.setCenter(center);
-                        Positioning.newPosition();
-                    });
-                    map.setCenter(center);
-                }, function() {
-                    handleNoGeolocation();
-                });
+                }
             }
         }
 
@@ -318,28 +328,38 @@ var Positioning={
         background.Positioning.geonamesVars(center.lat(),center.lng(),function(ob){
             gmt=ob.gmtOffset;
             timezoneId=ob.timezoneId;
+            country = ob.countryName;
+            countryCode = ob.countryCode;
         });
         background.Positioning.googlemapsLocation(center.lat(),center.lng(),function(ob){
+            formatted_address = null;
             for(var i = 0 ; i < ob.results.length; i++){
                 if($.inArray("administrative_area_level_2", ob.results[i].types) != -1/* ||  $.inArray("street_address", ob.results[i].types) != -1*/){
                     formatted_address=ob.results[i].formatted_address;
-                    for(j in ob.results[i].address_components){
-                        if($.inArray("country", ob.results[i].address_components[j].types) != -1){
-                            country = ob.results[i].address_components[j].long_name;
-                            countryCode = ob.results[i].address_components[j].short_name;
-                        }
-                        if($.inArray("administrative_area_level_1", ob.results[i].address_components[j].types) != -1){
-                            city = ob.results[i].address_components[j].long_name;
-                        }
-                    }
                     i = ob.results.length;
+                }
+            }
+            if(formatted_address == null){
+                for(var h = 0 ; h < ob.results.length; h++){
+                    if($.inArray("administrative_area_level_1", ob.results[h].types) != -1){
+                        formatted_address=ob.results[h].formatted_address;
+                        h = ob.results.length;
+                    }
+                }
+            }
+            if(formatted_address == null){
+                for( h = 0 ; h < ob.results.length; h++){
+                    if($.inArray("route", ob.results[h].types) != -1){
+                        formatted_address=ob.results[h].formatted_address;
+                        h = ob.results.length;
+                    }
                 }
             }
             $("#address").val(formatted_address);
         });
     }
 }
-
+var icOptions= new icOptions();
 $(function(){
     Positioning.initialize();
     $("#gotoButton").click(function(){

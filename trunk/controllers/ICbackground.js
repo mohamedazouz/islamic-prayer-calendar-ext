@@ -158,46 +158,51 @@ var icBackground=function(){
                 if(date.getDate() != lastdate.getDate() || date.getMonth() != lastdate.getMonth() ){
                     //u have calendar leek. :) do something about that.
                     //update the missing days.
-                    var daydiff=date.getTime()-lastdate.getTime();
-                    daydiff /= dayInMilliSecond;
-                    Positioning.getPosition(function(pos){
-                        Positioning.geonamesVars(pos.lat, pos.lng, function(ob){
-                            window.localStorage.gmtOffset=ob.gmtOffset;
-                            window.localStorage.timeZoneId=ob.timezoneId;
-
-                            var month =lastdate.getMonth()+1;
-                            icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
-                                for(var i =0; i < daydiff;i++){
-                                    lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
-                                    var dayPrayers = null;
-                                    if(lastdate.getMonth()+1 == month){
-                                        dayPrayers=ob[lastdate.getDate()];
-                                    }else{
-                                        dayPrayers=ob2[lastdate.getDate()];
-                                    }
-                                    var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),
-                                        dayPrayers.fajr.split(":")[0],
-                                        dayPrayers.fajr.split(":")[1]);
-                                    var zuhr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.zuhr.split(":")[0],dayPrayers.zuhr.split(":")[1]);
-                                    var asr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.asr.split(":")[0],dayPrayers.asr.split(":")[1]);
-                                    var maghrib=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.maghrib.split(":")[0],dayPrayers.maghrib.split(":")[1]);
-                                    var isha=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.isha.split(":")[0],dayPrayers.isha.split(":")[1]);
-                                    dayPrayers.fajrTime=fajr.getTime();
-                                    dayPrayers.zuhrTime=zuhr.getTime();
-                                    dayPrayers.asrTime=asr.getTime();
-                                    dayPrayers.maghribTime=maghrib.getTime();
-                                    dayPrayers.ishaTime=isha.getTime();
-                                    icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
-                                        console.log('inserting prayers done.');
-                                    });
-                                    icProxyService.insertDayPrayer(dayPrayers, function(resp){
-                                        console.log(resp)
-                                    });
-                                //now send to calendar to set new events.
+                    function sendData(pos){
+                        var month =lastdate.getMonth()+1;
+                        icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
+                            for(var i =0; i < daydiff;i++){
+                                lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
+                                var dayPrayers = null;
+                                if(lastdate.getMonth()+1 == month){
+                                    dayPrayers=ob[lastdate.getDate()];
+                                }else{
+                                    dayPrayers=ob2[lastdate.getDate()];
                                 }
+                                var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),
+                                    dayPrayers.fajr.split(":")[0],
+                                    dayPrayers.fajr.split(":")[1]);
+                                var zuhr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.zuhr.split(":")[0],dayPrayers.zuhr.split(":")[1]);
+                                var asr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.asr.split(":")[0],dayPrayers.asr.split(":")[1]);
+                                var maghrib=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.maghrib.split(":")[0],dayPrayers.maghrib.split(":")[1]);
+                                var isha=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),dayPrayers.isha.split(":")[0],dayPrayers.isha.split(":")[1]);
+                                dayPrayers.fajrTime=fajr.getTime();
+                                dayPrayers.zuhrTime=zuhr.getTime();
+                                dayPrayers.asrTime=asr.getTime();
+                                dayPrayers.maghribTime=maghrib.getTime();
+                                dayPrayers.ishaTime=isha.getTime();
+                                icdb.insertDayPrayer(dayPrayers, date_util.getDayString(lastdate, "-"), function(){
+                                    console.log('inserting prayers done.');
+                                });
+                                icProxyService.insertDayPrayer(dayPrayers, function(resp){
+                                    console.log(resp)
+                                });//now send to calendar to set new events.
+                            }
+                        });
+                    }
+                    var daydiff=date.getTime()-lastdate.getTime();
+                    daydiff /= dayInMilliSecond;//sendData
+                    if(window.localStorage.position && window.localStorage.timeZoneId){
+                        sendData(JSON.parse(window.localStorage.position));
+                    }else{
+                        Positioning.getPosition(function(pos){
+                            Positioning.geonamesVars(pos.lat, pos.lng, function(ob){
+                                window.localStorage.gmtOffset=ob.gmtOffset;
+                                window.localStorage.timeZoneId=ob.timezoneId;
+                                sendData(pos);
                             });
                         });
-                    });
+                    }
                 }
             });
         },
