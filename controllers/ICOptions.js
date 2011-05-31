@@ -46,7 +46,6 @@ icOptions = function(){
             icOptions.setOldSettings();
         },
         saveSettings:function(){
-            console.log(lat,lng)
             $("#saved").fadeIn(100, function(){
                 $("#save").attr("disabled", true);
                 window.setTimeout(function(){
