@@ -223,6 +223,14 @@ var icBackground=function(){
                     icbackground.calendarLast();
                 });
             });
+        },
+        /**
+         *
+         */
+        deleteAllPrayers:function(){
+            icProxyService.deleteAllPrayers(function(){
+                console.log('done deleteing all prayers');
+            });
         }
     }
     $(function(){
@@ -304,6 +312,9 @@ function onRequest(request, sender, callback) {
     }
     if(request.action == 'resetSettings'){
         icbackground.resetCalendar();
+    }
+    if(request.action == 'deleteAllPrayers'){
+        icbackground.deleteAllPrayers();
     }
 }
 

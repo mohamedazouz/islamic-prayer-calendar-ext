@@ -41,7 +41,8 @@ icOptions = function(){
                 icOptions.saveSettings();
             });
             $("#reset").click(function(){
-                window.location.reload();
+//                window.location.reload();
+                icOptions.resetAllPrayers();
             });
             icOptions.setOldSettings();
         },
@@ -188,6 +189,11 @@ icOptions = function(){
             $("#ishaPrayersEventLong").val(ishaS.eventLong);
             $("#ishaPrayersPrivacy").val(ishaS.privacy);
             $("#ishaPrayersStatus").val(ishaS.status);
+        },
+        resetAllPrayers:function(){
+            chrome.extension.sendRequest({
+                action:"deleteAllPrayers"
+            });
         }
     };
     $(function(){
