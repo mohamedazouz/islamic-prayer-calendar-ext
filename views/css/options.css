@@ -120,6 +120,7 @@ img{
     text-align:center;
     width:100%;
     padding-bottom:50px;
+	position:relative;
 }
 .radio-cont input[type='text']{
     width:345px;
@@ -182,4 +183,10 @@ img{
     border: 1px solid #CCC;
     -webkit-border-radius: 10px;
 
+}
+.tooltip {
+position: absolute;
+top: -193px;
+left: 340px;
+display:none;
 }

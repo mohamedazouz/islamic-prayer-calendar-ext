@@ -32,7 +32,7 @@ var Mylocals={
         "weakly":"أسبوعى",
         "monthly":"شهرى",
         "save":"حفظ",
-        "cancel":"الغاء التعديلات",
+        "cancel":"مسح",
         "allprayers":"كل الصلوات",
         "fajrPrayer":"صلاة الفجر",
         "zuhrPrayer":"صلاة الظهر",
