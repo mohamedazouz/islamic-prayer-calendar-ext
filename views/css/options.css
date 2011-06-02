@@ -176,13 +176,16 @@ img{
     box-shadow:0 0 4px #606060;
 }
 .saved{
-    background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#c9c9c9));
-    padding: 5px 8px;
-    margin-right: 295px;
-    color: #333;
-    border: 1px solid #CCC;
-    -webkit-border-radius: 10px;
-
+	background: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#C9C9C9));
+	padding: 5px 8px;
+	position: absolute;
+	top: -43px;
+	left: 445px;
+	color: #333;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 10px;
+	font-size: 12px;
+	box-shadow: 0px 0px 5px white inset;
 }
 .tooltip {
 position: absolute;
