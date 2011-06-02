@@ -107,8 +107,10 @@ var setLocals = function(){
         link.setAttribute("rel", "stylesheet");
         link.setAttribute("type", "text/css");
         $('head').append(link);
+        $("#tooltip img").attr("src","images/tooltip_en.png");
     }else{
         $("#NewStyle").remove();
+        $("#tooltip img").attr("src","images/tooltip_ar.png");
     }
     try{
         $("*").each(function(){
