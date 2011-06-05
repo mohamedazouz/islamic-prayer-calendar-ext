@@ -14,7 +14,7 @@ var ProxyService = {
     },
     //proxyRootURL:'http://calendar.activedd.com',
     //    proxyRootURL:'http://localhost:8084/cp',
-    proxyRootURL:'http://41.178.64.38:8080/CalendarProxy',
+    proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
