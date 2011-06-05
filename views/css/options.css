@@ -134,6 +134,9 @@ img{
     font:12px Tahoma, Geneva, sans-serif;
     cursor: pointer;
 }
+.button:hover{
+	background:url(../images/button-hover.png) no-repeat;
+}
 .map{
     width:850px;
     height:280px;
@@ -175,6 +178,9 @@ img{
     background: -webkit-gradient(linear, left top, left bottom, from(#1c1c1c), to(#565656));
     box-shadow:0 0 4px #606060;
 }
+.language-menu:hover  span {
+    background: -webkit-gradient(linear, left top, left bottom, from(#0078B6), to(#009CFF));
+}
 .saved{
 	background: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#C9C9C9));
 	padding: 5px 8px;
@@ -189,7 +195,7 @@ img{
 }
 .tooltip {
 position: absolute;
-top: -193px;
-left: 340px;
+top: -77px;
+left: 370px;
 display:none;
 }
