@@ -17,19 +17,20 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $('.language-menu').hover(function() {
-                    $('.sub-menu').stop(true, true).slideToggle('slow', function() {
-                        // Animation complete.
-                    });
-                });
-                $('#reset').hover(function() {
-                    $('.tooltip').stop(true, true).slideToggle('slow', function() {
-                        // Animation complete.
-                    });
-                });
-
-				
+                resetAction();
             });
+            function resetAction(){
+                $('#reset').bind("mouseover", function() {
+                    $('.tooltip').stop(true, true).show('slow', function() {
+                        // Animation complete.
+                    });
+                });
+                $('#reset').bind("mouseout", function() {
+                    $('.tooltip').stop(true, true).hide('slow', function() {
+                        // Animation complete.
+                    });
+                });
+            }
         </script>
     </head>
 
