@@ -33,7 +33,7 @@ icOptions = function(){
             $("#alertAll").change(function(){
                 $("#alertALERT , #alertEMAIL , #alertSMS").each(function(){
                     this.disabled=$("#alertAll").attr('checked');
-                    this.checked= false;
+                    this.checked= true;
                 });
             });
 
