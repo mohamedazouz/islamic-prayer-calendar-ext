@@ -42,7 +42,8 @@ var Mylocals={
         "ar":"العربية",
         "en":"English",
         "lang":"اللغة",
-        "saved":"تم حفظ الاعدادات"
+        "saved":"تم حفظ الاعدادات",
+        "deleted":" ‫سيتم حذف مواقيت الصلاة في غضون دقائق"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -81,7 +82,8 @@ var Mylocals={
         "ar":"العربية",
         "en":"English",
         "lang":"Lang",
-        "saved":"Settings Saved"
+        "saved":"Settings Saved",
+        "deleted":"The prayer times will be deleted within minutes!"
     }
 }
 var RTLStyle='css/english.css';

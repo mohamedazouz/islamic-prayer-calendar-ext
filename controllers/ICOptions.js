@@ -191,6 +191,14 @@ icOptions = function(){
             $("#ishaPrayersStatus").val(ishaS.status);
         },
         resetAllPrayers:function(){
+            $("#deleted").fadeIn(100, function(){
+                $("#reset").attr("disabled", true);
+                window.setTimeout(function(){
+                    $("#deleted").fadeOut(100, function(){
+                        $("#reset").attr("disabled", false);
+                    });
+                },5000);
+            });
             chrome.extension.sendRequest({
                 action:"deleteAllPrayers"
             });

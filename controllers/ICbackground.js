@@ -161,7 +161,7 @@ var icBackground=function(){
                     function sendData(pos){
                         var month =lastdate.getMonth()+1;
                         icProxyService.loadPrayerTimes(pos.lat, pos.lng,lastdate.getFullYear(), month, window.localStorage.gmtOffset, function(ob,ob2){
-                            for(var i =0; i < daydiff;i++){
+                            function recusiveSaving(index){
                                 lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
                                 var dayPrayers = null;
                                 if(lastdate.getMonth()+1 == month){
@@ -185,9 +185,15 @@ var icBackground=function(){
                                     console.log('inserting prayers done.');
                                 });
                                 icProxyService.insertDayPrayer(dayPrayers, function(resp){
-                                    console.log(resp)
+                                    console.log(new Date().getMinutes()+":"+new Date().getSeconds())
+                                    if(index +1 < daydiff){
+                                        recusiveSaving(index +1);
+                                    }else{
+                                        console.log('done saving');
+                                    }
                                 });//now send to calendar to set new events.
                             }
+                            recusiveSaving(0);
                         });
                     }
                     var daydiff=date.getTime()-lastdate.getTime();
