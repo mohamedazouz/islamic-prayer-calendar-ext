@@ -191,9 +191,13 @@ icOptions = function(){
             $("#ishaPrayersStatus").val(ishaS.status);
         },
         resetAllPrayers:function(){
+            $('.tooltip').hide();
+            $("#reset").unbind("mouseover");
+            $("#reset").unbind("mouseout");
             $("#deleted").fadeIn(100, function(){
                 $("#reset").attr("disabled", true);
                 window.setTimeout(function(){
+                    resetAction();
                     $("#deleted").fadeOut(100, function(){
                         $("#reset").attr("disabled", false);
                     });
