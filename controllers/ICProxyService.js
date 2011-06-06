@@ -13,8 +13,8 @@ var ProxyService = {
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
     //proxyRootURL:'http://calendar.activedd.com',
-    proxyRootURL:'http://localhost:8084/cp',
-//    proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
+//    proxyRootURL:'http://localhost:8084/cp',
+    proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm',
     fetchToken:'/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
