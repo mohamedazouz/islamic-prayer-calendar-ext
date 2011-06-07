@@ -144,7 +144,7 @@ var icBackground=function(){
         /**
          * check for the last calendar updated day, and if it's not within a week or a month as setted in the option complete it for week/month.
          */
-        calendarLast:function(){
+        calendarLast:function(fn){
             icdb.getLastday(function(lastprayer){
                 var lastdate=null;
                 if(lastprayer){
@@ -189,7 +189,7 @@ var icBackground=function(){
                                     if(index +1 < daydiff){
                                         recusiveSaving(index +1);
                                     }else{
-                                        console.log('done saving');
+                                        fn?fn(): console.log('done saving');
                                     }
                                 });//now send to calendar to set new events.
                             }
@@ -223,20 +223,18 @@ var icBackground=function(){
         /**
          *
          */
-        resetCalendar:function(){
+        resetCalendar:function(fn){
             icProxyService.deleteAllPrayers(function(){
                 icdb.deleteAllPrayers(function(){
-                    icbackground.calendarLast();
+                    icbackground.calendarLast(fn);
                 });
             });
         },
         /**
          *
          */
-        deleteAllPrayers:function(){
-            icProxyService.deleteAllPrayers(function(){
-                console.log('done deleteing all prayers');
-            });
+        deleteAllPrayers:function(fn){
+            icProxyService.deleteAllPrayers(fn);
         }
     }
     $(function(){
@@ -317,10 +315,10 @@ function onRequest(request, sender, callback) {
         icbackground.authenticate();
     }
     if(request.action == 'resetSettings'){
-        icbackground.resetCalendar();
+        icbackground.resetCalendar(callback);
     }
     if(request.action == 'deleteAllPrayers'){
-        icbackground.deleteAllPrayers();
+        icbackground.deleteAllPrayers(callback);
     }
 }
 

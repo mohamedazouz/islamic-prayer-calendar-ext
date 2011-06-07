@@ -28,7 +28,26 @@ icOptions = function(){
 
                     this.disabled = $("#AllprayersSettings").attr('checked');
                     this.checked = false;
+                    if(this.checked){
+                        $("#fajrPrayersReminderTime , #zuhrPrayersReminderTime, #asrPrayersReminderTime , #maghribPrayersReminderTime , #ishaPrayersReminderTime").attr('value',$("#allPrayersReminderTime").val()).trigger("change");
+                        $("#fajrPrayersEventLong , #zuhrPrayersEventLong, #asrPrayersEventLong , #maghribPrayersEventLong, #ishaPrayersEventLong").attr('value',$("#allPrayersEventLong").val()).trigger("change");
+                        $("#fajrPrayersPrivacy, #zuhrPrayersPrivacy, #asrPrayersPrivacy, #maghribPrayersPrivacy, #ishaPrayersPrivacy").attr('value',$("#allPrayersPrivacy").val()).trigger("change");
+                        $("#fajrPrayersStatus, #zuhrPrayersStatus, #asrPrayersStatus, #maghribPrayersStatus, #ishaPrayersStatus").attr('value',$("#allPrayersStatus").val()).trigger("change");
+                    }
                 });
+            });
+            $("#allPrayersReminderTime").change(function(){
+                $("#fajrPrayersReminderTime , #zuhrPrayersReminderTime, #asrPrayersReminderTime , #maghribPrayersReminderTime , #ishaPrayersReminderTime").attr('value',this.value).trigger("change");
+            });
+            $("#allPrayersEventLong").change(function(){
+                $("#fajrPrayersEventLong , #zuhrPrayersEventLong, #asrPrayersEventLong , #maghribPrayersEventLong, #ishaPrayersEventLong").attr('value',this.value).trigger("change");
+            });
+            $("#allPrayersPrivacy").change(function(){
+                $("#fajrPrayersPrivacy, #zuhrPrayersPrivacy, #asrPrayersPrivacy, #maghribPrayersPrivacy, #ishaPrayersPrivacy").attr('value',this.value).trigger("change");
+            });
+            $("#allPrayersStatus").change(function(){
+                $("#fajrPrayersStatus, #zuhrPrayersStatus, #asrPrayersStatus, #maghribPrayersStatus, #ishaPrayersStatus").attr('value',this.value).trigger("change");
+
             });
             $("#alertAll").change(function(){
                 $("#alertALERT , #alertEMAIL , #alertSMS").each(function(){
@@ -41,7 +60,6 @@ icOptions = function(){
                 icOptions.saveSettings();
             });
             $("#reset").click(function(){
-//                window.location.reload();
                 icOptions.resetAllPrayers();
             });
             icOptions.setOldSettings();
@@ -49,11 +67,6 @@ icOptions = function(){
         saveSettings:function(){
             $("#saved").fadeIn(100, function(){
                 $("#save").attr("disabled", true);
-                window.setTimeout(function(){
-                    $("#saved").fadeOut(100, function(){
-                        $("#save").attr("disabled", false);
-                    });
-                },5000);
             });
             window.localStorage.setup = true;
             //saving vars
@@ -118,6 +131,10 @@ icOptions = function(){
             }
             chrome.extension.sendRequest({
                 action:"resetSettings"
+            },function(){
+                $("#saved").fadeOut(100, function(){
+                    $("#save").attr("disabled", false);
+                });
             });
         },
         setOldSettings:function(){
@@ -196,15 +213,14 @@ icOptions = function(){
             $("#reset").unbind("mouseout");
             $("#deleted").fadeIn(100, function(){
                 $("#reset").attr("disabled", true);
-                window.setTimeout(function(){
-                    resetAction();
-                    $("#deleted").fadeOut(100, function(){
-                        $("#reset").attr("disabled", false);
-                    });
-                },5000);
             });
             chrome.extension.sendRequest({
                 action:"deleteAllPrayers"
+            },function(){
+                resetAction();
+                $("#deleted").fadeOut(100, function(){
+                    $("#reset").attr("disabled", false);
+                });
             });
         }
     };
