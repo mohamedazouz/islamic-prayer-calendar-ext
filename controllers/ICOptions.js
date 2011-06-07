@@ -10,7 +10,7 @@ icOptions = function(){
     var icOptions={
         initialize:function(){
             if(! window.localStorage.userAuth){
-                background.extension.openURL(background.ProxyService.proxyRootURL+background.ProxyService.authSub,true);
+                window.open(background.ProxyService.proxyRootURL+background.ProxyService.authSub,"");
                 chrome.extension.sendRequest({
                     'action':'authenticate'
                 });
