@@ -8,9 +8,12 @@ var ProxyService = {
      * lat=?&lng=?&yy=?&mm=?&gmt=?&m=json
      */
     XhanchPrayersURL : 'http://xhanch.com/api/islamic-get-prayer-time.php?',
-    //    XhanchPrayersURL : 'http://localhost:88/temp/prayer.json?',
+    activePrayersTimesURL: "http://prayertimes.activedd.com/calculate.php?",
     formXhanchPrayersURL:function(lat,lng,yy,mm,gmt){
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
+    },
+    formActivePrayersURL:function(lat,lng,yy,mm){
+        return ProxyService.activePrayersTimesURL+"lat"+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+"&username=activeddxwwx123456";
     },
     //proxyRootURL:'http://calendar.activedd.com',
 //    proxyRootURL:'http://localhost:8084/cp',
