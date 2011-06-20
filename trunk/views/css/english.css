@@ -28,3 +28,11 @@
 .tooltip {
 left: 458px;
 }
+.notification{
+	position:absolute;
+	left:auto;
+	right:0;
+	top:20px;
+	background: #E8E8E8;
+	padding:10px;
+	}
