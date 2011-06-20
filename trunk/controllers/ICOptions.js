@@ -89,6 +89,7 @@ icOptions = function(){
                     privacy:$("#allPrayersPrivacy").val(),
                     status:$("#allPrayersStatus").val()
                 });
+                window.localStorage.allSettings = JSON.stringify(allSettings);
                 window.localStorage.fajrSettings=allSettings;
                 window.localStorage.zuhrSettings=allSettings;
                 window.localStorage.asrSettings=allSettings;
@@ -139,6 +140,9 @@ icOptions = function(){
         },
         setOldSettings:function(){
             //stored vars
+            if(window.localStorage.allSettings){
+                var allS=JSON.parse(window.localStorage.allSettings);
+            }
             var fajrS=JSON.parse(window.localStorage.fajrSettings);
             var zuhrS=JSON.parse(window.localStorage.zuhrSettings);
             var asrS=JSON.parse(window.localStorage.asrSettings);
@@ -181,6 +185,13 @@ icOptions = function(){
             $("#googleCalendarSettings").parent('label').hide();
 
             $("#lastFor-"+lastFor).attr('checked',true);
+
+            if(allS){
+                $("#allPrayersReminderTime").val(allS.reminderAt);
+                $("#allPrayersEventLong").val(allS.eventLong);
+                $("#allPrayersPrivacy").val(allS.privacy);
+                $("#allPrayersStatus").val(allS.status);
+            }
 
             $("#fajrPrayersReminderTime").val(fajrS.reminderAt);
             $("#fajrPrayersEventLong").val(fajrS.eventLong);

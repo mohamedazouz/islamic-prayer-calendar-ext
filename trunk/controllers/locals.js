@@ -43,7 +43,8 @@ var Mylocals={
         "en":"English",
         "lang":"اللغة",
         "saved":"تم حفظ الاعدادات",
-        "deleted":" ‫سيتم حذف مواقيت الصلاة في غضون دقائق"
+        "deleted":" ‫سيتم حذف مواقيت الصلاة في غضون دقائق",
+        "timenote":"يجب أن يكون توقيت الحاسب مضبوط حتي تعمل الاضافة بالكفاءة اللازمة"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -83,7 +84,8 @@ var Mylocals={
         "en":"English",
         "lang":"Lang",
         "saved":"Settings Saved",
-        "deleted":"The prayer times will be deleted within minutes!"
+        "deleted":"The prayer times will be deleted within minutes!",
+        "timenote":"Computer time should be acurate so the extension works fine."
     }
 }
 var RTLStyle='css/english.css';
