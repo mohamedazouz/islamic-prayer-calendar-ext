@@ -44,7 +44,13 @@ var Mylocals={
         "lang":"اللغة",
         "saved":"تم حفظ الاعدادات",
         "deleted":" ‫سيتم حذف مواقيت الصلاة في غضون دقائق",
-        "timenote":"يجب أن يكون توقيت الحاسب مضبوط حتي تعمل الاضافة بالكفاءة اللازمة"
+        "timenote":"يجب أن يكون توقيت الحاسب مضبوط حتي تعمل الاضافة بالكفاءة اللازمة",
+        "badgeTitle":"باقي #HR ساعة/ساعات #MIN دقيقة/دقائق علي صلاة #PR",
+        "fajr":"الفجر",
+        "zuhr":"الظهر",
+        "asr":"العصر",
+        "maghrib":"المغرب",
+        "isha":"العشاء"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -85,7 +91,13 @@ var Mylocals={
         "lang":"Lang",
         "saved":"Settings Saved",
         "deleted":"The prayer times will be deleted within minutes!",
-        "timenote":"Computer time should be acurate so the extension works fine."
+        "timenote":"Computer time should be acurate so the extension works fine.",
+        "badgeTitle":"#HR hour(s) and #MIN minute(s) remain till the #PR prayer",
+        "fajr":"Fajr",
+        "zuhr":"Duhr",
+        "asr":"Asr",
+        "maghrib":"Maghrib",
+        "isha":"Isha'"
     }
 }
 var RTLStyle='css/english.css';
