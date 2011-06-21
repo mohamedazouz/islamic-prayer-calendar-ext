@@ -11,9 +11,10 @@ var icBackground=function(){
         initialize:function(){
             icbackground.initialData();
             icbackground.doInBackground();
-            if(! window.localStorage.setup){
+            //skip open option page if not settings saved.
+            /*if(! window.localStorage.setup){
                 extension.openOptionPage();
-            }
+            }*/
         },
         /**
          * set Extension initial data settings.

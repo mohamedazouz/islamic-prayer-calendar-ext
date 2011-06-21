@@ -68,7 +68,8 @@ icOptions = function(){
             $("#saved").fadeIn(100, function(){
                 $("#save").attr("disabled", true);
             });
-            window.localStorage.setup = true;
+            //skip label saving.
+            //window.localStorage.setup = true;
             //saving vars
             window.localStorage.timeZoneId=timezoneId;
             window.localStorage.gmtOffset=gmt;
