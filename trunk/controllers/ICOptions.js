@@ -5,7 +5,7 @@
 var background=chrome.extension.getBackgroundPage();
 
 var lat,lng,gmt,country,countryCode,timezoneId,city,formatted_address;
-var map,marker,geocoder,center;
+var map,marker,geocoder,center,zoomLevel=6;
 icOptions = function(){
     var icOptions={
         initialize:function(){
@@ -246,7 +246,7 @@ icOptions = function(){
 var Positioning={
     initialize:function(){
         var myOptions = {
-            zoom: 6,
+            zoom: zoomLevel,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             streetViewControl:false
         };
@@ -263,7 +263,9 @@ var Positioning={
 
         //adding lister to changer lat,lng as the zoom changed.
         google.maps.event.addListener(map, 'zoom_changed', function() {
-            center = map.getCenter();
+            zoomLevel = map.getZoom();
+//            center = map.getCenter();
+            map.setCenter(center)
             marker.setPosition(center);
             moveToDarwin(center.lat(),center.lng());
             Positioning.newPosition();
@@ -321,7 +323,7 @@ var Positioning={
         function handleNoGeolocation() {
             map.setCenter(new google.maps.LatLng(43.834526782236814, -37.265625));
             map.setOptions({
-                zoom:2
+                zoom:zoomLevel
             });
         }
     },
@@ -334,8 +336,9 @@ var Positioning={
             'address': address
         }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                marker.setPosition(results[0].geometry.location);
+                center = results[0].geometry.location;
+                map.setCenter(center);
+                marker.setPosition(center);
                 marker.setDraggable(true);
                 google.maps.event.addListener(marker,'dragend',function(){
                     center=marker.getPosition();
@@ -343,7 +346,7 @@ var Positioning={
                     Positioning.newPosition();
                 });
                 map.setOptions({
-                    zoom:6
+                    zoom:zoomLevel
                 });
                 Positioning.newPosition();
             } else {
@@ -409,6 +412,10 @@ $(function(){
     Positioning.initialize();
     $("#gotoButton").click(function(){
         Positioning.codeAddress();
+    });
+    $("#searchForm").submit(function(){
+        Positioning.codeAddress();
+        return false;
     });
     window.setTimeout(Positioning.newPosition, 1000);
 })

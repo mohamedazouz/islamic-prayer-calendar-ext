@@ -42,15 +42,9 @@
                 <div class="page-title f" local="PrayersSettings">اعدادات مواقيت الصلاة</div>
                 <!-- language switch logo -->
                 <div class="language-menu f-r">
-                    <div class="f" local="lang">اللغة</div>
+                    <div onclick="$('#langChooser').trigger('click');" class="f" local="lang">اللغة</div>
                     <img src="images/separator.png" class="f" />
-                    <!--                    <span class="f language">العربية</span>
-                                        <div class="sub-menu">
-                                            <ul>
-                                                <li>الانجليزية</li>
-                                            </ul>
-                                        </div>-->
-                    <select id="langChooser" class="styled">
+                    <select id="langChooser" class="styled" style="margin-right: -35px;width: 97px !important;">
                         <option local="ar" value="ar">العربية</option>
                         <option local="en" value="en">English</option>
                     </select>
@@ -66,7 +60,7 @@
                     <input type="radio" id="current" name="radio" class="styled" /><a local="currentPosition"> تبعا للمكان الحالى</a>
                 </label>
 
-                <form action="" onsubmit="return false;">
+                <form action="" id="searchForm">
                     <input id="address" type="text" />
                     <button id="gotoButton" type="button" class="button" local="search" >بحــــث</button>
                 </form>
