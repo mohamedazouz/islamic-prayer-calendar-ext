@@ -128,6 +128,7 @@ var setLocals = function(){
         $("#NewStyle").remove();
         $("div.tooltip img").attr("src","images/tooltip_ar.png");
     }
+    $("#language").text(Mylocals.en[window.localStorage.lang]);
     try{
         $("*").each(function(){
             var local=$(this).attr("local");
@@ -141,9 +142,21 @@ var setLocals = function(){
 }
 $(function(){
     setLocals();
-    $("#langChooser").val(window.localStorage.lang);
-    $("#langChooser").change(function(){
-        window.localStorage.lang=this.value;
+//    $("#langChooser").val(window.localStorage.lang);
+//    $("#langChooser").change(function(){
+//        window.localStorage.lang=this.value;
+//        setLocals();
+//    });
+    $("#langChooser").click(function(){
+        changeLang();
         setLocals();
     });
-})
+    changeLang = function(){
+        var lang = window.localStorage.lang;
+        if(lang == 'ar'){
+            window.localStorage.lang = 'en';
+        }else{
+            window.localStorage.lang = 'ar';
+        }
+    }
+});

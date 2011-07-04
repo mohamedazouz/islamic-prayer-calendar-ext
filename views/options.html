@@ -42,12 +42,13 @@
                 <div class="page-title f" local="PrayersSettings">اعدادات مواقيت الصلاة</div>
                 <!-- language switch logo -->
                 <div class="language-menu f-r">
-                    <div onclick="$('#langChooser').trigger('click');" class="f" local="lang">اللغة</div>
+                    <div id="langChooser" class="f lang" local="lang">اللغة</div>
                     <img src="images/separator.png" class="f" />
-                    <select id="langChooser" class="styled" style="margin-right: -35px;width: 97px !important;">
+                    <div class="f" id="language">العربية</div>
+<!--                    <select id="langChooser" class="styled" style="margin-right: -35px;width: 97px !important;">
                         <option local="ar" value="ar">العربية</option>
                         <option local="en" value="en">English</option>
-                    </select>
+                    </select>-->
                 </div>
             </div>
             <!-- location selection -->
