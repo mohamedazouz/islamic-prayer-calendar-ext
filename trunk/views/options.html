@@ -30,6 +30,11 @@
                         // Animation complete.
                     });
                 });
+                $('.language-menu').hover(function() {
+                    $('.sub-menu').stop(true, true).slideToggle('slow', function() {
+                        // Animation complete.
+                    });
+                });
             }
         </script>
     </head>
@@ -41,14 +46,32 @@
                 <!-- title of extension -->
                 <div class="page-title f" local="PrayersSettings">اعدادات مواقيت الصلاة</div>
                 <!-- language switch logo -->
+                <!--                <div class="language-menu f-r">
+                                    <div id="" class="f lang" local="lang">اللغة</div>
+                                    <img src="images/separator.png" class="f" />
+                                                        <div class="f" id="language">العربية</div>
+                                                        <select id="langChooser" class="styled" style="margin-right: -35px;width: 97px !important;">
+                                                            <option local="ar" value="ar">العربية</option>
+                                                            <option local="en" value="en">English</option>
+                                                        </select>
+                                    <div class="sub-menu">
+                                        <ul>
+                                            <li>الانجليزية</li>
+                                            <li>الفرنسية</li>
+                                            <li>الايطالية</li>
+                                        </ul>
+                                    </div>
+                                </div>-->
                 <div class="language-menu f-r">
-                    <div id="langChooser" class="f lang" local="lang">اللغة</div>
+                    <span class="f" style="cursor: pointer;" local="lang">اللغة</span>
                     <img src="images/separator.png" class="f" />
-                    <div class="f" id="language">العربية</div>
-<!--                    <select id="langChooser" class="styled" style="margin-right: -35px;width: 97px !important;">
-                        <option local="ar" value="ar">العربية</option>
-                        <option local="en" value="en">English</option>
-                    </select>-->
+                    <span class="f language" id="language">العربية</span>
+                    <div class="sub-menu">
+                        <ul id="langChooser">
+                            <li id="en" local="en">الانجليزية</li>
+                            <li id="ar" local="ar">العربية</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- location selection -->
@@ -56,7 +79,7 @@
                 <div class="gred" local="positioning">تحديد المكان</div>
             </div>
             <div class="radio-cont f">
-            	<div class="notification" local="timenote">يجب ان يكون التوقيت الحاسب مضبوط حتي يعمل الاضافة بالكفائة اللازمة</div>
+                <div class="notification" local="timenote">يجب ان يكون التوقيت الحاسب مضبوط حتي يعمل الاضافة بالكفائة اللازمة</div>
                 <label>
                     <input type="radio" id="current" name="radio" class="styled" /><a local="currentPosition"> تبعا للمكان الحالى</a>
                 </label>
