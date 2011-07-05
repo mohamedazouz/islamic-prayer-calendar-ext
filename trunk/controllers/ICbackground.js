@@ -11,8 +11,8 @@ var icBackground=function(){
         initialize:function(){
             icbackground.initialData();
             icbackground.doInBackground();
-            //skip open option page if not settings saved.
-            /*if(! window.localStorage.setup){
+        //skip open option page if not settings saved.
+        /*if(! window.localStorage.setup){
                 extension.openOptionPage();
             }*/
         },
@@ -121,9 +121,9 @@ var icBackground=function(){
                 timeDeff /= (1000 * 60);
                 extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
                 chrome.browserAction.setTitle({
-                        title:(((Mylocals[window.localStorage.lang].badgeTitle).replace("#HR",Math.floor(timeDeff / 60))).
-                            replace("#MIN", Math.floor(timeDeff % 60))).replace("#PR", Mylocals[window.localStorage.lang][window.localStorage.nextPrayerName])
-                    });
+                    title:(((Mylocals[window.localStorage.lang].badgeTitle).replace("#HR",Math.floor(timeDeff / 60))).
+                        replace("#MIN", Math.floor(timeDeff % 60))).replace("#PR", Mylocals[window.localStorage.lang][window.localStorage.nextPrayerName])
+                });
             }
             
         },
@@ -228,6 +228,11 @@ var icBackground=function(){
         authenticate:function(){
             icProxyService.getAuthSubToken(0, function(ob){
                 window.localStorage.userAuth=ob.authToken;
+                window.localStorage.logged="true";
+                window.localStorage.user=JSON.stringify({
+                    name:ob.username,
+                    userAuth:ob.authToken
+                });
             });
         },
         /**
