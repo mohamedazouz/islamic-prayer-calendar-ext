@@ -36,3 +36,9 @@ left: 458px;
 	background: #E8E8E8;
 	padding:10px;
 	}
+.welcome{
+	text-align: right;
+	}
+.logout{
+  margin: 0 0 0 10px;
+}

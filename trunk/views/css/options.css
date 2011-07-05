@@ -208,3 +208,24 @@ top: -77px;
 left: 370px;
 display:none;
 }
+.welcome{
+	text-align: left;
+	width: 700px;
+	padding: 0 10px;
+	font-weight: bold;
+	margin-top: 10px;
+	}
+.logout{
+	padding: 4px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#1C1C1C), to(#565656));
+	box-shadow: 0 0 4px #606060;
+	color: white;
+	margin: 0 10px 0 0;
+	font-weight: normal;
+	height: 15px;
+	line-height: 9px;
+	cursor: pointer;
+}
+.logout:hover{
+background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
+}
