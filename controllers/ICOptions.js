@@ -9,16 +9,19 @@ var map,marker,geocoder,center,zoomLevel=6;
 icOptions = function(){
     var icOptions={
         initialize:function(){
-            if(! window.localStorage.userAuth){
+        /*if(! window.localStorage.userAuth){
                 window.open(background.ProxyService.proxyRootURL+background.ProxyService.authSub,"");
                 chrome.extension.sendRequest({
                     'action':'authenticate'
                 });
                 window.close();
-            }
+            }*/
         },
         domEvents:function(){
             //set dom events
+            $("#login").click(function(){
+                icOptions.login();
+            });
             $("#AllprayersSettings").change(function(){
                 $("#fajrPrayer , #zuhrPrayer , #asrPrayer , #maghribPrayer , #ishaPrayer ,#fajrPrayersReminderTime,"+
                     "#asrPrayersReminderTime, #zuhrPrayersReminderTime, #maghribPrayersReminderTime, #ishaPrayersReminderTime,"
@@ -140,6 +143,13 @@ icOptions = function(){
             });
         },
         setOldSettings:function(){
+            if(window.localStorage.logged == "true"){
+                var user = JSON.parse(window.localStorage.user);
+                $("#user").text(user.name);
+                $("#logged").show();
+            }else{
+                $("#notLogged").show();
+            }
             //stored vars
             if(window.localStorage.allSettings){
                 var allS=JSON.parse(window.localStorage.allSettings);
@@ -219,6 +229,13 @@ icOptions = function(){
             $("#ishaPrayersPrivacy").val(ishaS.privacy);
             $("#ishaPrayersStatus").val(ishaS.status);
         },
+        login:function(){
+            window.open(background.ProxyService.proxyRootURL+background.ProxyService.authSub,"");
+            chrome.extension.sendRequest({
+                'action':'authenticate'
+            });
+            window.close();
+        },
         resetAllPrayers:function(){
             $('.tooltip').hide();
             $("#reset").unbind("mouseover");
@@ -264,7 +281,7 @@ var Positioning={
         //adding lister to changer lat,lng as the zoom changed.
         google.maps.event.addListener(map, 'zoom_changed', function() {
             zoomLevel = map.getZoom();
-//            center = map.getCenter();
+            //            center = map.getCenter();
             map.setCenter(center)
             marker.setPosition(center);
             moveToDarwin(center.lat(),center.lng());

@@ -50,7 +50,11 @@ var Mylocals={
         "zuhr":"الظهر",
         "asr":"العصر",
         "maghrib":"المغرب",
-        "isha":"العشاء"
+        "isha":"العشاء",
+        "logoff":"خروج",
+        "hellow":"مرحبا",
+        "login":"اضغط هنا للدخول",
+        "notlogged":"أنت لم تسجل الدخول بعد"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -97,7 +101,11 @@ var Mylocals={
         "zuhr":"Duhr",
         "asr":"Asr",
         "maghrib":"Maghrib",
-        "isha":"Isha'"
+        "isha":"Isha'",
+        "logoff":"log off",
+        "hellow":"Hello",
+        "login":"اضغط هنا للدخول",
+        "notlogged":"أنت لم تسجل الدخول بعد"
     }
 }
 var RTLStyle='css/english.css';
