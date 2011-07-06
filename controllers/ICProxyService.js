@@ -179,6 +179,7 @@ var ICProxyService = function(ob){
                 url:ProxyService.proxyRootURL + ProxyService.fetchToken,
                 dataType:'json',
                 success:function(ob){
+                    console.log(JSON.stringify(ob))
                     if((! ob || ob.status != '200')){
                         if(count < 60){
                             window.setTimeout(function (){
