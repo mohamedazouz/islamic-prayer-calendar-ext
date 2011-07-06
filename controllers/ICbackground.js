@@ -229,14 +229,16 @@ var icBackground=function(){
             icProxyService.getAuthSubToken(0, function(ob){
                 window.localStorage.userAuth=ob.authToken;
                 window.localStorage.logged="true";
-                icProxyService.getGmailUserInfo(ob,function(response){
+                window.localStorage.user=JSON.stringify(ob)
+               /* icProxyService.getGmailUserInfo(ob,function(response){
                     json=JSON.parse(response);
+                    
                     window.localStorage.user=JSON.stringify({
                         name:json.name,
                         userAuth:ob.authToken,
                         email:json.email
                     });
-                })
+                })*/
             });
         },
         /**

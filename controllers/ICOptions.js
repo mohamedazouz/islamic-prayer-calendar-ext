@@ -236,7 +236,7 @@ icOptions = function(){
             $("#ishaPrayersStatus").val(ishaS.status);
         },
         login:function(){
-            window.open(background.ProxyService.authSub,"");
+            window.open(background.ProxyService.proxyRootURL+background.ProxyService.authSub,"");
             chrome.extension.sendRequest({
                 'action':'authenticate'
             });

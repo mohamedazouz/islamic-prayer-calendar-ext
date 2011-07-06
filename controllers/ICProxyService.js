@@ -18,14 +18,14 @@ var ProxyService = {
     //proxyRootURL:'http://calendar.activedd.com',
     proxyRootURL:'http://41.130.147.16:8080/CalendarProxy',
     //proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
-    //authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
-      authSub:'http://41.130.147.16:8080/GmailContactProxy/proxy/logincalender.htm??nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
-    //fetchToken:'/authsub/fetchtoken.htm',
-    fetchToken:'http://calendar.activedd.com/authsub/fetchtoken.htm',
+    authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
+    //  authSub:'http://41.130.147.16:8080/GmailContactProxy/proxy/logincalender.htm??nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
+    fetchToken:'/authsub/fetchtoken.htm',
+    //fetchToken:'http://calendar.activedd.com/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
     deleteOldURL:'/isprayer/deleteOldPrayers.htm',
-    deleteAllURL:'/isprayer/deleteAllPrayers.htm',
-    userDetailsURL:"http://41.130.147.16:8080/GmailContactProxy/proxy/getUserDetails.htm"
+    deleteAllURL:'/isprayer/deleteAllPrayers.htm'
+//userDetailsURL:"http://41.130.147.16:8080/GmailContactProxy/proxy/getUserDetails.htm"
 }
 var ICProxyService = function(ob){
     var icProxyService = {
@@ -176,7 +176,7 @@ var ICProxyService = function(ob){
                 count=0;
             }
             $.ajax({
-                url:ProxyService.fetchToken,
+                url:ProxyService.proxyRootURL + ProxyService.fetchToken,
                 dataType:'json',
                 success:function(ob){
                     if((! ob || ob.status != '200')){
