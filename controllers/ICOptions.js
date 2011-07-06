@@ -22,6 +22,11 @@ icOptions = function(){
             $("#login").click(function(){
                 icOptions.login();
             });
+            $("#logging").click(function(){
+                window.localStorage.logged="false";
+                window.localStorage.user="";
+                icOptions.setOldSettings();
+            });
             $("#AllprayersSettings").change(function(){
                 $("#fajrPrayer , #zuhrPrayer , #asrPrayer , #maghribPrayer , #ishaPrayer ,#fajrPrayersReminderTime,"+
                     "#asrPrayersReminderTime, #zuhrPrayersReminderTime, #maghribPrayersReminderTime, #ishaPrayersReminderTime,"
@@ -148,6 +153,7 @@ icOptions = function(){
                 $("#user").text(user.name);
                 $("#logged").show();
             }else{
+                $("#logged").hide();
                 $("#notLogged").show();
             }
             //stored vars
@@ -230,7 +236,7 @@ icOptions = function(){
             $("#ishaPrayersStatus").val(ishaS.status);
         },
         login:function(){
-            window.open(background.ProxyService.proxyRootURL+background.ProxyService.authSub,"");
+            window.open(background.ProxyService.authSub,"");
             chrome.extension.sendRequest({
                 'action':'authenticate'
             });
