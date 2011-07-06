@@ -104,8 +104,8 @@ var Mylocals={
         "isha":"Isha'",
         "logoff":"log off",
         "hellow":"Hello",
-        "login":"اضغط هنا للدخول",
-        "notlogged":"أنت لم تسجل الدخول بعد"
+        "login":"Log in",
+        "notlogged":"you are not logged in"
     }
 }
 var RTLStyle='css/english.css';

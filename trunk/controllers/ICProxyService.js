@@ -55,10 +55,10 @@ var ICProxyService = function(ob){
          * delete prayers that in the past.
          */
         deleteOldPrayers:function(fn){
-            if(! window.localStorage.userAuth){
+            if(! window.localStorage.user){
                 return;
             }
-            var authToken=window.localStorage.userAuth;
+            var authToken=JSON.parse(window.localStorage.user).authToken;
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.deleteOldURL,
                 dataType:'json',
@@ -74,10 +74,10 @@ var ICProxyService = function(ob){
          * delete all prayers events.
          */
         deleteAllPrayers:function(fn){
-            if(! window.localStorage.userAuth){
+           if(! window.localStorage.user){
                 return;
             }
-            var authToken=window.localStorage.userAuth;
+            var authToken=JSON.parse(window.localStorage.user).authToken;
             $.ajax({
                 url:ProxyService.proxyRootURL+ProxyService.deleteAllURL,
                 dataType:'json',
@@ -95,7 +95,7 @@ var ICProxyService = function(ob){
          * Object must contains match the following {time sttime, busytime, privacy, status}
          */
         insertDayPrayer:function(prayerDay,fn,count){
-            if(! window.localStorage.userAuth){
+            if(! window.localStorage.user){
                 if(! count){
                     count = 1;
                 }
@@ -111,7 +111,7 @@ var ICProxyService = function(ob){
             if(eventFor.length == 0){
                 return;
             }
-            var authToken=window.localStorage.userAuth;
+            var authToken=JSON.stringify(window.localStorage.user);
             var fajrSettings=JSON.parse(window.localStorage.fajrSettings);
             var zuhrSettings=JSON.parse(window.localStorage.zuhrSettings);
             var asrSettings=JSON.parse(window.localStorage.asrSettings);
