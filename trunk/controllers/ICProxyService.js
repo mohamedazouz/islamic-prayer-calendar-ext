@@ -16,13 +16,16 @@ var ProxyService = {
         return ProxyService.activePrayersTimesURL+"lat"+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+"&username=activeddxwwx123456";
     },
     //proxyRootURL:'http://calendar.activedd.com',
-//    proxyRootURL:'http://localhost:8084/cp',
-    proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
-    authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
-    fetchToken:'/authsub/fetchtoken.htm',
+    proxyRootURL:'http://41.130.147.16:8080/CalendarProxy',
+    //proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
+    //authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
+      authSub:'http://41.130.147.16:8080/GmailContactProxy/proxy/logincalender.htm??nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
+    //fetchToken:'/authsub/fetchtoken.htm',
+    fetchToken:'http://calendar.activedd.com/authsub/fetchtoken.htm',
     insertURL:'/isprayer/setiprayersForDay.htm',
     deleteOldURL:'/isprayer/deleteOldPrayers.htm',
-    deleteAllURL:'/isprayer/deleteAllPrayers.htm'
+    deleteAllURL:'/isprayer/deleteAllPrayers.htm',
+    userDetailsURL:"http://41.130.147.16:8080/GmailContactProxy/proxy/getUserDetails.htm"
 }
 var ICProxyService = function(ob){
     var icProxyService = {
@@ -173,7 +176,7 @@ var ICProxyService = function(ob){
                 count=0;
             }
             $.ajax({
-                url:ProxyService.proxyRootURL+ProxyService.fetchToken,
+                url:ProxyService.fetchToken,
                 dataType:'json',
                 success:function(ob){
                     if((! ob || ob.status != '200')){
@@ -192,6 +195,28 @@ var ICProxyService = function(ob){
                             icProxyService.getAuthSubToken(count+1, handler);
                         }, 1000);
                     }
+                }
+            })
+        },
+        /**
+         *
+         **/
+        getGmailUserInfo:function(ob,callback){
+            //alert(JSON.parse(window.localStorage.gmailAuthToken).authToken)
+            var url=ProxyService.userDetailsURL
+            json={
+                token:ob.authToken
+            }
+            $.ajax({
+                url:url,
+                dataType: "html",
+                data:json,
+                success:function(response){
+                    callback(response)
+                },
+                error:function(data){
+                    console.log("error")
+                    callback("error")
                 }
             })
         }
