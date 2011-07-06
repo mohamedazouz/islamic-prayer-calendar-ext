@@ -24,7 +24,7 @@ icOptions = function(){
             });
             $("#logging").click(function(){
                 window.localStorage.logged="false";
-                window.localStorage.user="";
+                 window.localStorage.user=null;
                 icOptions.setOldSettings();
             });
             $("#AllprayersSettings").change(function(){
@@ -151,6 +151,7 @@ icOptions = function(){
             if(window.localStorage.logged == "true"){
                 var user = JSON.parse(window.localStorage.user);
                 $("#user").text(user.name);
+                $("#userEmail").text(user.email);
                 $("#logged").show();
             }else{
                 $("#logged").hide();

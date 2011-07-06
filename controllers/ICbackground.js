@@ -227,7 +227,7 @@ var icBackground=function(){
          */
         authenticate:function(){
             icProxyService.getAuthSubToken(0, function(ob){
-                window.localStorage.userAuth=ob.authToken;
+                //window.localStorage.userAuth=ob.authToken;
                 window.localStorage.logged="true";
                 window.localStorage.user=JSON.stringify(ob)
                /* icProxyService.getGmailUserInfo(ob,function(response){
