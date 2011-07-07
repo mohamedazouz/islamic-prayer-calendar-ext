@@ -44,60 +44,60 @@ img{
 .styled{
     width:60px!important;
     cursor: pointer;
-    
+
 }
 
 /* page style */
 
 .container{
-	width:1000px;
-	margin:0 auto;
-	font-family:Tahoma, Geneva, sans-serif;
-	font-size:14px;
-	color:#4c4c4c;
-	direction:rtl;
-	}
+    width:1000px;
+    margin:0 auto;
+    font-family:Tahoma, Geneva, sans-serif;
+    font-size:14px;
+    color:#4c4c4c;
+    direction:rtl;
+}
 .page-title{
-	margin:20px;
-	font-size:17px;
-	}
+    margin:20px;
+    font-size:17px;
+}
 .language-menu{
-	margin:10px;
-	color:#FFF;
-	font-size:13px;
-	position:relative;
-	}
+    margin:10px;
+    color:#FFF;
+    font-size:13px;
+    position:relative;
+}
 .language-menu span{
-	padding:4px;
-	background: -webkit-gradient(linear, left top, left bottom, from(#1c1c1c), to(#565656));
-	box-shadow:0 0 4px #606060;
-	}
+    padding:4px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#1c1c1c), to(#565656));
+    box-shadow:0 0 4px #606060;
+}
 .language{
-	width:117px;
-	cursor:pointer;
-	}
+    width:117px;
+    cursor:pointer;
+}
 .sub-menu{
-	width:125px;
-	position:absolute;
-	left:0;
-	top:24px;
-	box-shadow:0 0 4px #606060;
-	display:none;
-	z-index:888;
-	}
+    width:125px;
+    position:absolute;
+    left:0;
+    top:24px;
+    box-shadow:0 0 4px #606060;
+    display:none;
+    z-index:888;
+}
 .sub-menu ul{
-	margin:0;
-	padding:0;
-	list-style:none;
-	}
+    margin:0;
+    padding:0;
+    list-style:none;
+}
 .sub-menu li{
-	padding:5px;
-	background: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#565656));
-	cursor:pointer;
-	}
+    padding:5px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#565656));
+    cursor:pointer;
+}
 .sub-menu li:hover{
-	background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
-	}
+    background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
+}
 .titles-bar{
     width:1000px;
     height:40px;
@@ -116,20 +116,20 @@ img{
 .radio-cont{
     padding:20px;
     font-size:12px;
-	position:relative;
+    position:relative;
 }
 .notification{
-	position:absolute;
-	left:0;
-	top:20px;
-	background: #E8E8E8;
-	padding:10px;
-	}
+    position:absolute;
+    left:0;
+    top:20px;
+    background: #E8E8E8;
+    padding:10px;
+}
 .button-cont{
     text-align:center;
     width:100%;
     padding-bottom:50px;
-	position:relative;
+    position:relative;
 }
 .radio-cont input[type='text']{
     width:345px;
@@ -144,7 +144,7 @@ img{
     cursor: pointer;
 }
 .button:hover{
-	background:url(../images/button-hover.png) no-repeat;
+    background:url(../images/button-hover.png) no-repeat;
 }
 .map{
     width:850px;
@@ -163,7 +163,7 @@ img{
 }
 .checkbox-all{
     margin-left:200px;
-	margin-right:20px;
+    margin-right:20px;
 }
 .note{
     width:380px;
@@ -187,45 +187,53 @@ img{
 }
 .lang:hover{
     cursor: pointer;
-    
+
 }
 
 .saved{
-	background: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#C9C9C9));
-	padding: 5px 8px;
-	position: absolute;
-	top: -43px;
-	left: 445px;
-	color: #333;
-	border: 1px solid #CCC;
-	-webkit-border-radius: 10px;
-	font-size: 12px;
-	box-shadow: 0px 0px 5px white inset;
+    background: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#C9C9C9));
+    padding: 5px 8px;
+    position: absolute;
+    top: -43px;
+    left: 445px;
+    color: #333;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 10px;
+    font-size: 12px;
+    box-shadow: 0px 0px 5px white inset;
 }
 .tooltip {
-position: absolute;
-top: -77px;
-left: 370px;
-display:none;
+    position: absolute;
+    top: -77px;
+    left: 370px;
+    display:none;
 }
 .welcome{
-	text-align: left;
-	width: 700px;
-	padding: 0 10px;
-	font-weight: bold;
-	margin-top: 10px;
-	}
+    text-align: left;
+    width: 700px;
+    padding: 0 10px;
+    font-weight: bold;
+    margin-top: 10px;
+}
 .logout{
-	padding: 4px;
-	background: -webkit-gradient(linear, left top, left bottom, from(#1C1C1C), to(#565656));
-	box-shadow: 0 0 4px #606060;
-	color: white;
-	margin: 0 10px 0 0;
-	font-weight: normal;
-	height: 15px;
-	line-height: 9px;
-	cursor: pointer;
+    padding: 4px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#1C1C1C), to(#565656));
+    box-shadow: 0 0 4px #606060;
+    color: white;
+    margin: 0 10px 0 0;
+    font-weight: normal;
+    cursor: pointer;
+    height: 16px;
+    line-height: 15px;
+    font-size: 13px;
 }
 .logout:hover{
-background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#0078b6), to(#009cff));
+}
+#userEmail {
+    font-size: 10px;
+}
+#logged span {
+   text-align: left;
+   margin-top: -3px;
 }
