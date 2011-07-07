@@ -24,7 +24,7 @@ icOptions = function(){
             });
             $("#logging").click(function(){
                 window.localStorage.logged="false";
-                 window.localStorage.user=null;
+                window.localStorage.user=null;
                 icOptions.setOldSettings();
             });
             $("#AllprayersSettings").change(function(){
@@ -65,10 +65,18 @@ icOptions = function(){
             });
 
             $("#save").click(function(){
-                icOptions.saveSettings();
+                if(!window.localStorage.user || window.localStorage.user=="null"){
+                    alert(Mylocals[window.localStorage.lang].warningmessage);
+                }else{
+                    icOptions.saveSettings();
+                }
             });
             $("#reset").click(function(){
-                icOptions.resetAllPrayers();
+                if(!window.localStorage.user || window.localStorage.user=="null"){
+                    alert(Mylocals[window.localStorage.lang].warningmessage);
+                }else{
+                    icOptions.resetAllPrayers();
+                }
             });
             icOptions.setOldSettings();
         },
