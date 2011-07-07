@@ -111,7 +111,7 @@ var ICProxyService = function(ob){
             if(eventFor.length == 0){
                 return;
             }
-            var authToken=JSON.stringify(window.localStorage.user);
+            var authToken=JSON.parse(window.localStorage.user).authToken;
             var fajrSettings=JSON.parse(window.localStorage.fajrSettings);
             var zuhrSettings=JSON.parse(window.localStorage.zuhrSettings);
             var asrSettings=JSON.parse(window.localStorage.asrSettings);
