@@ -55,7 +55,7 @@ var ICProxyService = function(ob){
          * delete prayers that in the past.
          */
         deleteOldPrayers:function(fn){
-            if(! window.localStorage.user){
+            if(! window.localStorage.user || window.localStorage.user =="null"){
                 return;
             }
             var authToken=JSON.parse(window.localStorage.user).authToken;
@@ -74,7 +74,7 @@ var ICProxyService = function(ob){
          * delete all prayers events.
          */
         deleteAllPrayers:function(fn){
-           if(! window.localStorage.user){
+           if(! window.localStorage.user || window.localStorage.user =="null"){
                 return;
             }
             var authToken=JSON.parse(window.localStorage.user).authToken;
@@ -95,7 +95,7 @@ var ICProxyService = function(ob){
          * Object must contains match the following {time sttime, busytime, privacy, status}
          */
         insertDayPrayer:function(prayerDay,fn,count){
-            if(! window.localStorage.user){
+            if(! window.localStorage.user || window.localStorage.user=="null"){
                 if(! count){
                     count = 1;
                 }
