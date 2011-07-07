@@ -54,7 +54,8 @@ var Mylocals={
         "logoff":"خروج",
         "hellow":"مرحبا",
         "login":"اضغط هنا للدخول",
-        "notlogged":"أنت لم تسجل الدخول بعد"
+        "notlogged":"أنت لم تسجل الدخول بعد",
+        "warningmessage":"انت غير مسجل ،رجاء التسجبل فى الاعلى"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -105,7 +106,8 @@ var Mylocals={
         "logoff":"log off",
         "hellow":"Hello",
         "login":"Log in",
-        "notlogged":"you are not logged in"
+        "notlogged":"you are not logged in",
+        "warningmessage":"you are not logged in, Please login above"
     }
 }
 var RTLStyle='css/english.css';
