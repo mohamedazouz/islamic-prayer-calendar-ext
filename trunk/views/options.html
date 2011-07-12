@@ -40,15 +40,15 @@
     </head>
 
     <body>
-		<div class="overlay">
-			<div class="popup">
-				<span class="f">لتسجيل الدخول</span>
-				<a href="" class="f" >إضغط هنا</a>
-				
-			</div>
-		</div>
-		
-		
+        <div class="overlay" id="notLogged2" style="display: none;">
+            <div class="popup">
+                <span local="forloggin" class="f"></span>
+                <a id="login" local="clickhere" style="cursor: pointer;" class="f"></a>
+
+            </div>
+        </div>
+
+
         <!-- main container -->
         <div class="container">
             <div>
@@ -71,7 +71,7 @@
 
                 </div>
                 <div id="notLogged" style="display: none;" class="welcome f-r">
-                    <a local="login" id="login" class="logout f-r"></a>
+                    <a local="login"  class="logout f-r"></a>
                     <a local="notlogged"></a>
                 </div>
                 <div class="language-menu f-r">

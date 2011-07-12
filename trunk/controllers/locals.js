@@ -55,7 +55,9 @@ var Mylocals={
         "hellow":"مرحبا",
         "login":"اضغط هنا للدخول",
         "notlogged":"أنت لم تسجل الدخول بعد",
-        "warningmessage":"انت غير مسجل ،رجاء التسجبل فى الاعلى"
+        "warningmessage":"انت غير مسجل ،رجاء التسجبل فى الاعلى",
+        "clickhere":"اضغط هنا",
+        "forloggin":"لتسجيل الدخول"
     },
     en:{
         "PrayersSettings":"Prayer Times Settings",
@@ -107,7 +109,9 @@ var Mylocals={
         "hellow":"Hello",
         "login":"Log in",
         "notlogged":"you are not logged in",
-        "warningmessage":"you are not logged in, Please login above"
+        "warningmessage":"you are not logged in, Please login above",
+        "clickhere":"click here",
+        "forloggin":"to login"
     }
 }
 var RTLStyle='css/english.css';

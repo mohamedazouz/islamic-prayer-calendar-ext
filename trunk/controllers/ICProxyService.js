@@ -16,8 +16,9 @@ var ProxyService = {
         return ProxyService.activePrayersTimesURL+"lat"+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+"&username=activeddxwwx123456";
     },
     //proxyRootURL:'http://calendar.activedd.com',
-    proxyRootURL:'http://41.130.147.16:8080/CalendarProxy',
-    //proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
+//	proxyRootURL:'http://192.168.1.155:8080/CalendarProxy',
+    //proxyRootURL:'http://41.130.147.16:8080/CalendarProxy',
+    proxyRootURL:'http://local.activedd.com:8080/CalendarProxy',
     authSub:'/authsub/login.htm?nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
     //  authSub:'http://41.130.147.16:8080/GmailContactProxy/proxy/logincalender.htm??nextcallback=../extensionloginthanks.htm?p='+chrome.extension.getURL('views/options.html'),
     fetchToken:'/authsub/fetchtoken.htm',

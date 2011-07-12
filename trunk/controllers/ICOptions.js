@@ -164,6 +164,7 @@ icOptions = function(){
             }else{
                 $("#logged").hide();
                 $("#notLogged").show();
+                $("#notLogged2").show();
             }
             //stored vars
             if(window.localStorage.allSettings){
