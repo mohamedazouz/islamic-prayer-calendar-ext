@@ -111,7 +111,7 @@ var Mylocals={
         "notlogged":"you are not logged in",
         "warningmessage":"you are not logged in, Please login above",
         "clickhere":"click here",
-        "forloggin":"to login"
+        "forloggin":"To login"
     }
 }
 var RTLStyle='css/english.css';
