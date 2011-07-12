@@ -15,5 +15,5 @@
         "default_title": "Islamic Calendar"//,
 //        "popup": "views/options.html"
     },
-    "permissions": [ "http://local.activedd.com/*","http://xhanch.com/*","https://maps.googleapis.com/*","http://localhost/*","geolocation"]
+    "permissions": ["http://*/*", "http://local.activedd.com/*","http://xhanch.com/*","https://maps.googleapis.com/*","http://localhost/*","geolocation"]
 }
