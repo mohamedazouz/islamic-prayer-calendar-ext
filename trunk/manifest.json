@@ -1,6 +1,6 @@
 {
     "name":"Islamic Calendar",
-    "version": "1.0",
+    "version": "1.0.4",
     "description": "",
     "background_page": "views/background.html",
     "options_page": "views/options.html",
