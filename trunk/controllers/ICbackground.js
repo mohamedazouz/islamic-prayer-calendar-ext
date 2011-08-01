@@ -175,9 +175,9 @@ var icBackground=function(){
                                 lastdate.setTime(lastdate.getTime() + dayInMilliSecond);
                                 var dayPrayers = null;
                                 if(lastdate.getMonth()+1 == month){
-                                    dayPrayers=ob[lastdate.getDate()];
+                                    dayPrayers=ob[(lastdate.getDate() > 9 ? lastdate.getDate() : "0"+lastdate.getDate())];
                                 }else{
-                                    dayPrayers=ob2[lastdate.getDate()];
+                                    dayPrayers=ob2[(lastdate.getDate() > 9 ? lastdate.getDate() : "0"+lastdate.getDate())];
                                 }
                                 var fajr=new Date(lastdate.getFullYear(),lastdate.getMonth(),lastdate.getDate(),
                                     dayPrayers.fajr.split(":")[0],
