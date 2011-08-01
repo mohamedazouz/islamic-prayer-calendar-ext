@@ -12,8 +12,8 @@ var ProxyService = {
     formXhanchPrayersURL:function(lat,lng,yy,mm,gmt){
         return ProxyService.XhanchPrayersURL+'lat='+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+'&gmt='+gmt+'&m=json';
     },
-    formActivePrayersURL:function(lat,lng,yy,mm){
-        return ProxyService.activePrayersTimesURL+"lat"+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+"&username=activeddxwwx123456";
+    formActivePrayersURL:function(lat,lng,yy,mm,gmt){
+        return ProxyService.activePrayersTimesURL+"lat="+lat+'&lng='+lng+'&yy='+yy+'&mm='+mm+"&tz="+gmt+"&username=activeddxwwx123456";
     },
     proxyRootURL:'http://calendar.activedd.com',
 //    proxyRootURL:'http://192.168.1.155:8080/CalendarProxy',
@@ -36,7 +36,7 @@ var ICProxyService = function(ob){
          */
         loadPrayerTimes:function(lat,lng,yy,mm,gmt,fn){
             $.ajax({
-                url:ProxyServic.formXhanchPrayersURL(lat, lng, yy, mm, gmt),
+                url:ProxyServic.formActivePrayersURL(lat, lng, yy, mm, gmt),
                 dataType:'json',
                 success:function(res){
                     var nextMon = (parseInt(mm)+1) %12;
@@ -44,7 +44,7 @@ var ICProxyService = function(ob){
                         yy = parseInt(yy)+1;
                     }
                     $.ajax({
-                        url:ProxyServic.formXhanchPrayersURL(lat, lng, yy, nextMon, gmt),
+                        url:ProxyServic.formActivePrayersURL(lat, lng, yy, nextMon, gmt),
                         dataType:'json',
                         success:function(res2){
                             fn(res,res2)
