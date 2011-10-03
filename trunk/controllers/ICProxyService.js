@@ -183,7 +183,7 @@ var ICProxyService = function(ob){
                 success:function(ob){
                     console.log(JSON.stringify(ob))
                     if((! ob || ob.status != '200')){
-                        if(count < 60){
+                        if(count < 90){
                             window.setTimeout(function (){
                                 icProxyService.getAuthSubToken(count+1, handler);
                             }, 1000);
@@ -193,7 +193,7 @@ var ICProxyService = function(ob){
                     }
                 },
                 error:function(){
-                    if(count < 60){
+                    if(count < 90){
                         window.setTimeout(function(){
                             icProxyService.getAuthSubToken(count+1, handler);
                         }, 1000);
