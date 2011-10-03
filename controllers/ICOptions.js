@@ -311,7 +311,7 @@ var Positioning={
 
         google.maps.event.addListener(map, "drag", function() {
             center = map.getCenter();
-            marker.setPosition(center);
+            //marker.setPosition(center);
             moveToDarwin(center.lat(), center.lng());
         });
 
@@ -330,7 +330,7 @@ var Positioning={
                 map: map,
                 position: center
             });
-            marker.setDraggable(true);
+            marker.setDraggable(false);
             google.maps.event.addListener(marker,'dragend',function(){
                 center=marker.getPosition();
                 map.setCenter(center);
@@ -372,7 +372,7 @@ var Positioning={
                 center = results[0].geometry.location;
                 map.setCenter(center);
                 marker.setPosition(center);
-                marker.setDraggable(true);
+                marker.setDraggable(false);
                 google.maps.event.addListener(marker,'dragend',function(){
                     center=marker.getPosition();
                     map.setCenter(center);
