@@ -11,8 +11,8 @@ var icBackground=function(){
         initialize:function(){
             icbackground.initialData();
             icbackground.doInBackground();
-        //skip open option page if not settings saved.
-        /*if(! window.localStorage.setup){
+            //skip open option page if not settings saved.
+            /*if(! window.localStorage.setup){
                 extension.openOptionPage();
             }*/
         },
@@ -245,9 +245,11 @@ var icBackground=function(){
          *
          */
         resetCalendar:function(fn){
+            delete window.localStorage.nextPrayer;
             icProxyService.deleteAllPrayers(function(){
                 icdb.deleteAllPrayers(function(){
                     icbackground.calendarLast(fn);
+                    icbackground.nextPrayerBadge();
                 });
             });
         },
