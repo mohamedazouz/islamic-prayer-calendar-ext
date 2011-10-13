@@ -1,50 +1,48 @@
-.f{
+.f {
 	float:left;
-	}
-.f-r{
+}
+.f-r {
 	float:right;
-	}
-.container{
+}
+.container {
 	direction:ltr;
-	}
+}
 .checkbox, .radio {
 	float: left;
 }
-.sub-menu{
+.sub-menu {
 	left:37px;
-	}
-.gred{
+}
+.gred {
 	right:auto;
 	left:20px;
-	}
+}
 .checkbox-all {
 	margin-left:20px;
 	margin-right:200px;
 }
 .checkbox, .radio {
-
 	margin-right: 5px;
 }
 .tooltip {
-left: 458px;
+	left: 458px;
 }
-.notification{
-	position:absolute;
-	left:auto;
-	right:0;
-	top:20px;
-	background: #E8E8E8;
-	padding:10px;
-	}
-.welcome{
+.notification {
+	position: absolute;
+	left: auto;
+	right: 0;
+	top: 3px;
+	width: 435px;
+}
+.welcome {
 	text-align: right;
-	}
-.logout{
-  margin: 0 0 0 10px;
 }
-.popup span{
+.logout {
+	margin: 0 0 0 10px;
+}
+.popup span {
 	margin-left:125px;
 	margin-right:0px;
 }
-.popup a{
+.popup a {
 }
