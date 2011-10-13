@@ -122,8 +122,9 @@ img{
     position:absolute;
     left:0;
     top:20px;
-    background: #E8E8E8;
     padding:10px;
+	background: url(../images/warning.png) no-repeat 426px 18px #E8E8E8;
+	width: 435px;
 }
 .notification ul{
 	margin:0;
