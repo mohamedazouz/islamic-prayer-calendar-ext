@@ -15,6 +15,15 @@ var icBackground=function(){
             /*if(! window.localStorage.setup){
                 extension.openOptionPage();
             }*/
+            if(! window.localStorage.nextPrayer){
+                chrome.browserAction.setIcon({
+                    path:'../views/icons/option_link-icon.png'
+                });
+            }else{
+                chrome.browserAction.setIcon({
+                    path:'../views/icons/32.png'
+                });
+            }
         },
         /**
          * set Extension initial data settings.
@@ -106,7 +115,7 @@ var icBackground=function(){
                     window.localStorage.nextPrayerName= ob.name;
                     var timeDeff = nextPrayer - new Date().getTime();
                     timeDeff /= (1000 * 60);
-                    extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
+                    //extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
                     chrome.browserAction.setTitle({
                         title:(((Mylocals[window.localStorage.lang].badgeTitle).replace("#HR",Math.floor(timeDeff / 60))).
                             replace("#MIN", Math.floor(timeDeff % 60))).replace("#PR", Mylocals[window.localStorage.lang][window.localStorage.nextPrayerName])
@@ -119,7 +128,7 @@ var icBackground=function(){
             }else{
                 var timeDeff = nextPrayer - new Date().getTime();
                 timeDeff /= (1000 * 60);
-                extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
+                //extension.setBadgeText(Math.floor(timeDeff / 60) + ":" + Math.floor(timeDeff % 60));
                 chrome.browserAction.setTitle({
                     title:(((Mylocals[window.localStorage.lang].badgeTitle).replace("#HR",Math.floor(timeDeff / 60))).
                         replace("#MIN", Math.floor(timeDeff % 60))).replace("#PR", Mylocals[window.localStorage.lang][window.localStorage.nextPrayerName])

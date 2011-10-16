@@ -81,6 +81,11 @@ icOptions = function(){
             icOptions.setOldSettings();
         },
         saveSettings:function(){
+            //setting the new label.
+            chrome.browserAction.setIcon({
+                path:'../views/icons/32.png'
+            });
+            
             $("#saved").fadeIn(100, function(){
                 $("#save").attr("disabled", true);
             });
@@ -302,13 +307,13 @@ var Positioning={
             //stoping the marker moving.
             //marker.setPosition(center);
             moveToDarwin(center.lat(),center.lng());
-            //Positioning.newPosition();
+        //Positioning.newPosition();
         });
 
         //adding listener to dragging the map
         google.maps.event.addListener(map, "dragend", function() {
             //Positioning.newPosition();
-        });
+            });
 
         google.maps.event.addListener(map, "drag", function() {
             center = map.getCenter();
