@@ -409,8 +409,8 @@ var Positioning={
         }else{
             Positioning.geonamesVars();
         }
-        lat = Math.sqrt( (center.lat()) * (center.lat()));
-        lng = Math.sqrt( (center.lng()) * (center.lng()));
+        lat = center.lat();
+        lng = center.lng();
     },
     geonamesVars:function(){
         background.Positioning.geonamesVars(center.lat(),center.lng(),function(ob){
