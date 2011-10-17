@@ -12,7 +12,7 @@
     },
     "browser_action": {
         "default_icon": "views/icons/option_link-icon.png",
-        "default_title": "Islamic Calendar"//,
+        "default_title": "Click here to choose your city."//,
 //        "popup": "views/options.html"
     },
     "permissions": ["http://*/*", "http://local.activedd.com/*","http://xhanch.com/*","https://maps.googleapis.com/*","http://localhost/*","geolocation"]
